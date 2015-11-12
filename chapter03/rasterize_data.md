@@ -86,5 +86,3 @@ readLines(gimms_header)
 ```
 
 It is possible to automatically remove the created header files once all operations have finished by setting `rasterizeGimms(..., remove_header = TRUE)`. Although `rasterizeGimms` automatically invokes `createHeader`, the function also runs as stand-alone version.
-
-

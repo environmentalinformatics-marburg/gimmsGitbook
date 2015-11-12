@@ -1,7 +1,7 @@
 
 # Global Mann-Kendall trend test
 
-A function called `significantTau` has recently been added to **gimms** in order to facilitate the calculation of reliable long-term monotonous trends. It is up to the user to decide whether or not to apply pre-whitening prior to applying the Mann-Kendall trend test in order to account for lag-1 autocorrelation. Currently, the function supports the pre-whitening algorithms proposed by Yue, Pilon, Phinney, et al. (2002) and Zhang, Vincent, Hogg, et al. (2000) which are both included in the **zyp** package (Bronaugh and Consortium, 2013). 
+A function called `significantTau` has recently been added to **gimms** in order to facilitate the calculation of reliable long-term monotonous trends. It is up to the user to decide whether or not to apply pre-whitening prior to applying the Mann-Kendall trend test in order to account for lag-1 autocorrelation. Currently, the function supports the pre-whitening algorithms proposed by Yue, Pilon, Phinney, et al. (2002) and Zhang, Vincent, Hogg, et al. (2000) which are both included in the **zyp** package (Bronaugh and Werner, 2013). 
 
 
 ```r
@@ -116,5 +116,3 @@ spplot(gimms_raster_trend, col.regions = cols(111), scales = list(draw = TRUE),
   <img src="http://i.imgur.com/5JvSV42.png" alt="spplot" style="width: 800px;"/><br>
   <b>Figure 3.</b> Long-term trend (1982-2013; p < 0.001) in global GIMMS NDVI<sub>3g</sub> derived from pixel-based Mann-Kendall trend tests (Mann, 1945).
 </center>
-
-

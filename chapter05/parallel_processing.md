@@ -4,7 +4,8 @@
 At this point, it is time for some considerations on code performance. I constructed the single **gimms** functions to the best of my knowledge, but there is still room for further speed gains, which particularly applies to data download and rasterization. If you are not already familiar with the basic principles of how to go parallel in R, this [short tutorial on G-Forge](http://gforge.se/2015/02/how-to-go-parallel-in-r-basics-tips/) will provide you with valuable insights.
 
 <center>
-  <img src="https://i2.wp.com/gforge.se/wp-content/uploads/2015/02/Horse_power_smudge_9000.jpg" alt="parallel" style="width: 500px;"/>
+  <img src="https://i2.wp.com/gforge.se/wp-content/uploads/2015/02/Horse_power_smudge_9000.jpg" alt="parallel" style="width: 500px;"/><br>
+  <small>Source: http://gforge.se/wp-content/uploads/2015/02/Horse_power_smudge_9000.jpg</small>
 </center>
 
 ### Parallel downloads
@@ -96,6 +97,4 @@ system.time(
 #  0.122   0.105  37.298
 ```
 
-In the context of parallel processing, feel free to also browse the compendium of advanced applications based on GIMMS NDVI<sub>3g</sub> data herein after. There are some more examples included demonstrating the reasonable use of **doParallel** functionality (Analytics and Weston, 2015) along with the **gimms** package.
-
-
+In the context of parallel processing, feel free to also browse the compendium of advanced applications based on GIMMS NDVI<sub>3g</sub> data herein after. There are some more examples included demonstrating the reasonable use of **doParallel** functionality (RevolutionAnalytics and Weston, 2015) along with the **gimms** package.

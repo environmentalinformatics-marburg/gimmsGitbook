@@ -60,5 +60,3 @@ As a fourth and final possibility to run `downloadGimms`, it is also possible to
 downloadGimms(x = gimms_files[c(98:110, 132)], 
               dsn = paste0(getwd(), "/data"))
 ```
-
-

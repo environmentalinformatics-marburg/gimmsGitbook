@@ -29,5 +29,3 @@ The development version including latest functionality updates, bug-fixes etc. c
 library(devtools)
 install_github("environmentalinformatics-marburg/gimms", ref = "develop")
 ```
-
-
