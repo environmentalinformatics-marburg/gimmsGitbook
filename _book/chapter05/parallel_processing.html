@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>&#39;gimms&#39; goes parallel | Introducing the R &#39;gimms&#39; package</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.4.0">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="../chapter05/mann_kendall.html" />
+    
+    
+    <link rel="prev" href="../chapter05/advanced_applications.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book" data-level="5.1" data-basepath=".." data-revision="Thu Nov 12 2015 09:13:58 GMT+0100 (CET)">
+    
+
+<div class="book-summary">
+    <div class="book-search" role="search">
+        <input type="text" placeholder="Type to search" class="form-control" />
+    </div>
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="chapter01/introduction.html">
+            
+                
+                    <a href="../chapter01/introduction.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        What&#39;s the story?
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="chapter02/data_download.html">
+            
+                
+                    <a href="../chapter02/data_download.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        Data download
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="chapter03/rasterize_data.html">
+            
+                
+                    <a href="../chapter03/rasterize_data.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        Rasterize data
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4" data-path="chapter04/monthly_composites.html">
+            
+                
+                    <a href="../chapter04/monthly_composites.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        Monthly composites
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5" data-path="chapter05/advanced_applications.html">
+            
+                
+                    <a href="../chapter05/advanced_applications.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        Advanced applications
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="5.1" data-path="chapter05/parallel_processing.html">
+            
+                
+                    <a href="../chapter05/parallel_processing.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.1.</b>
+                        
+                        &#39;gimms&#39; goes parallel
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="chapter05/mann_kendall.html">
+            
+                
+                    <a href="../chapter05/mann_kendall.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.2.</b>
+                        
+                        Mann-Kendall trend test
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="chapter05/breakpoint_analysis.html">
+            
+                
+                    <a href="../chapter05/breakpoint_analysis.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.3.</b>
+                        
+                        &#39;BFAST&#39; breakpoint analysis
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6" data-path="references.html">
+            
+                
+                    <a href="../references.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.</b>
+                        
+                        References
+                    </a>
+            
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    <a href="#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
+    
+    <div id="font-settings-wrapper" class="dropdown pull-left">
+        <a href="#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+    <div class="dropdown-caret">
+        <span class="caret-outer"></span>
+        <span class="caret-inner"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="button" id="reduce-font-size" class="button size-2">A</button>
+        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
+    </div>
+
+    <div class="buttons font-family-list">
+        <button type="button" data-font="0" class="button">Serif</button>
+        <button type="button" data-font="1" class="button">Sans</button>
+    </div>
+
+    <div class="buttons color-theme-list">
+        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
+        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
+        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Actions Right -->
+    
+    <div class="dropdown pull-right">
+        <a href="#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
+        </a>
+        <div class="dropdown-menu font-settings dropdown-left">
+            <div class="dropdown-caret">
+                <span class="caret-outer"></span>
+                <span class="caret-inner"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" data-sharing="twitter" class="button">
+                    Share on Twitter
+                </button>
+                <button type="button" data-sharing="google-plus" class="button">
+                    Share on Google
+                </button>
+                <button type="button" data-sharing="facebook" class="button">
+                    Share on Facebook
+                </button>
+                <button type="button" data-sharing="weibo" class="button">
+                    Share on Weibo
+                </button>
+                <button type="button" data-sharing="instapaper" class="button">
+                    Share on Instapaper
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <a href="#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+    
+    
+    
+
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../" >Introducing the R &#39;gimms&#39; package</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="-gimms-goes-parallel">&apos;gimms&apos; goes parallel</h1>
+<p>At this point, it is time for some considerations on code performance. I constructed the single <strong>gimms</strong> functions to the best of my knowledge, but there is still room for further speed gains, which particularly applies to data download and rasterization. If you are not already familiar with the basic principles of how to go parallel in R, this <a href="http://gforge.se/2015/02/how-to-go-parallel-in-r-basics-tips/" target="_blank">short tutorial on G-Forge</a> will provide you with valuable insights.</p>
+<center>
+  <img src="https://i2.wp.com/gforge.se/wp-content/uploads/2015/02/Horse_power_smudge_9000.jpg" alt="parallel" style="width: 500px;">
+</center>
+
+<h3 id="parallel-downloads">Parallel downloads</h3>
+<p>Provided that you have a sufficiently fast active internet connection, it is quite easy to distribute the actual GIMMS download procedure to multiple nodes. Say you want to download all files from the first half of the year 2000, the standard approach would look as follows. </p>
+<pre><code class="lang-r">system.time(
+  local_files &lt;- downloadGimms(x = as.Date(<span class="hljs-string">&quot;2000-01-01&quot;</span>), y = as.Date(<span class="hljs-string">&quot;2000-06-30&quot;</span>), 
+                               dsn = paste0(getwd(), <span class="hljs-string">&quot;/data&quot;</span>), overwrite = <span class="hljs-literal">TRUE</span>)
+)
+<span class="hljs-comment">#   user  system elapsed </span>
+<span class="hljs-comment">#  0.336   2.736  84.654</span>
+</code></pre>
+<p>And here is the parallel version which, on my machine and with my internet connections, performs roughly 2.5 times faster.</p>
+<pre><code class="lang-r">system.time({
+  <span class="hljs-comment">## avl files</span>
+  gimms_files &lt;- updateInventory()
+  <span class="hljs-comment">## files from 2000</span>
+  gimms_files &lt;- gimms_files[grep(<span class="hljs-string">&quot;geo00&quot;</span>, gimms_files)]
+  <span class="hljs-comment">## files from jan-jun</span>
+  gimms_files &lt;- gimms_files[<span class="hljs-number">1</span>:<span class="hljs-number">12</span>]
+
+  <span class="hljs-comment">## initialize parallel backend with 3 nodes</span>
+  <span class="hljs-keyword">library</span>(doParallel)
+  cl &lt;- makeCluster(<span class="hljs-number">3</span>)
+  registerDoParallel(cl)
+
+  <span class="hljs-comment">## download single files</span>
+  local_files &lt;- foreach(i = gimms_files, .combine = <span class="hljs-string">&quot;c&quot;</span>, 
+                         .packages = <span class="hljs-string">&quot;gimms&quot;</span>) %dopar% {
+    downloadGimms(i, dsn = paste0(getwd(), <span class="hljs-string">&quot;/data&quot;</span>), overwrite = <span class="hljs-literal">TRUE</span>)
+  }
+
+  <span class="hljs-comment">## close parallel backend</span>
+  stopCluster(cl)
+})
+<span class="hljs-comment">#   user  system elapsed </span>
+<span class="hljs-comment">#  0.181   0.154  32.919</span>
+</code></pre>
+<h3 id="parallel-rasterization">Parallel rasterization</h3>
+<p>Speed gains can furthermore be achieved when running <code>rasterizeGimms</code> with the <code>raster::writeRaster</code> option enabled, i.e., parameter <code>filename</code> specified. When run in parallel, the operation performs considerably faster as compared to the base implementation. </p>
+<pre><code class="lang-r"><span class="hljs-comment">## first, the base version from above</span>
+system.time(
+  local_rasters &lt;- rasterizeGimms(local_files, filename = local_files, 
+                                  format = <span class="hljs-string">&quot;GTiff&quot;</span>, overwrite = <span class="hljs-literal">TRUE</span>)
+)
+<span class="hljs-comment">#   user  system elapsed </span>
+<span class="hljs-comment"># 62.916   4.594  70.480 </span>
+
+<span class="hljs-comment">## next, the parallelized version</span>
+rasterizeGimmsParallel &lt;- <span class="hljs-keyword">function</span>(files, nodes = <span class="hljs-number">3</span>, <span class="hljs-keyword">...</span>) {
+
+  <span class="hljs-comment"># create and register parallel backend</span>
+  <span class="hljs-keyword">library</span>(doParallel)
+  cl &lt;- makeCluster(nodes)
+  registerDoParallel(cl)
+
+  <span class="hljs-comment"># loop over &apos;x&apos; and process single files in parallel</span>
+  ls_rst &lt;- foreach(i = files, .packages = <span class="hljs-string">&quot;gimms&quot;</span>, 
+                    .export = ls(envir = globalenv())) %dopar% {
+                      rasterizeGimms(i, filename = i, <span class="hljs-keyword">...</span>)
+                    }
+
+  <span class="hljs-comment"># stack layers</span>
+  rst &lt;- raster::stack(ls_rst)
+
+  <span class="hljs-comment"># deregister parallel backend</span>
+  stopCluster(cl)
+
+  <span class="hljs-comment"># return layers</span>
+  <span class="hljs-keyword">return</span>(rst)
+}
+
+system.time(
+  rasterizeGimmsParallel(local_files, 
+                         format = <span class="hljs-string">&quot;GTiff&quot;</span>, overwrite = <span class="hljs-literal">TRUE</span>)
+)
+<span class="hljs-comment">#   user  system elapsed </span>
+<span class="hljs-comment">#  0.122   0.105  37.298</span>
+</code></pre>
+<p>In the context of parallel processing, feel free to also browse the compendium of advanced applications based on GIMMS NDVI<sub>3g</sub> data herein after. There are some more examples included demonstrating the reasonable use of <strong>doParallel</strong> functionality (Analytics and Weston, 2015) along with the <strong>gimms</strong> package.</p>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../chapter05/advanced_applications.html" class="navigation navigation-prev " aria-label="Previous page: Advanced applications"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../chapter05/mann_kendall.html" class="navigation navigation-next " aria-label="Next page: Mann-Kendall trend test"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

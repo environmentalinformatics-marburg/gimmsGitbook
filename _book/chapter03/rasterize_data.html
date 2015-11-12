@@ -1,0 +1,411 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Rasterize data | Introducing the R &#39;gimms&#39; package</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.4.0">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="../chapter04/monthly_composites.html" />
+    
+    
+    <link rel="prev" href="../chapter02/data_download.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book" data-level="3" data-basepath=".." data-revision="Thu Nov 12 2015 09:13:58 GMT+0100 (CET)">
+    
+
+<div class="book-summary">
+    <div class="book-search" role="search">
+        <input type="text" placeholder="Type to search" class="form-control" />
+    </div>
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="chapter01/introduction.html">
+            
+                
+                    <a href="../chapter01/introduction.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        What&#39;s the story?
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="chapter02/data_download.html">
+            
+                
+                    <a href="../chapter02/data_download.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        Data download
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="3" data-path="chapter03/rasterize_data.html">
+            
+                
+                    <a href="../chapter03/rasterize_data.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        Rasterize data
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4" data-path="chapter04/monthly_composites.html">
+            
+                
+                    <a href="../chapter04/monthly_composites.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        Monthly composites
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5" data-path="chapter05/advanced_applications.html">
+            
+                
+                    <a href="../chapter05/advanced_applications.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        Advanced applications
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1" data-path="chapter05/parallel_processing.html">
+            
+                
+                    <a href="../chapter05/parallel_processing.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.1.</b>
+                        
+                        &#39;gimms&#39; goes parallel
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="chapter05/mann_kendall.html">
+            
+                
+                    <a href="../chapter05/mann_kendall.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.2.</b>
+                        
+                        Mann-Kendall trend test
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="chapter05/breakpoint_analysis.html">
+            
+                
+                    <a href="../chapter05/breakpoint_analysis.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.3.</b>
+                        
+                        &#39;BFAST&#39; breakpoint analysis
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6" data-path="references.html">
+            
+                
+                    <a href="../references.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.</b>
+                        
+                        References
+                    </a>
+            
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    <a href="#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
+    
+    <div id="font-settings-wrapper" class="dropdown pull-left">
+        <a href="#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+    <div class="dropdown-caret">
+        <span class="caret-outer"></span>
+        <span class="caret-inner"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="button" id="reduce-font-size" class="button size-2">A</button>
+        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
+    </div>
+
+    <div class="buttons font-family-list">
+        <button type="button" data-font="0" class="button">Serif</button>
+        <button type="button" data-font="1" class="button">Sans</button>
+    </div>
+
+    <div class="buttons color-theme-list">
+        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
+        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
+        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Actions Right -->
+    
+    <div class="dropdown pull-right">
+        <a href="#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
+        </a>
+        <div class="dropdown-menu font-settings dropdown-left">
+            <div class="dropdown-caret">
+                <span class="caret-outer"></span>
+                <span class="caret-inner"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" data-sharing="twitter" class="button">
+                    Share on Twitter
+                </button>
+                <button type="button" data-sharing="google-plus" class="button">
+                    Share on Google
+                </button>
+                <button type="button" data-sharing="facebook" class="button">
+                    Share on Facebook
+                </button>
+                <button type="button" data-sharing="weibo" class="button">
+                    Share on Weibo
+                </button>
+                <button type="button" data-sharing="instapaper" class="button">
+                    Share on Instapaper
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <a href="#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+    
+    
+    
+
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../" >Introducing the R &#39;gimms&#39; package</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="rasterize-data">Rasterize data</h1>
+<h3 id="rearrange-files">Rearrange files</h3>
+<p>As mentioned earlier, it is possible to have <code>updateInventory</code> return a vector of filenames sorted by date in ascending order. Sorting the files surely makes sense when it comes to <code>raster::stack</code>-ing continuous observations, calculating monthly composite layers and so forth, but is not necessarily required at the initial stage. <code>updateInventory(sort = TRUE)</code> (the default setting) is merely a wrapper around <code>rearrangeFiles</code> which may as well be executed as a stand-alone version later on. </p>
+<p><code>rearrangeFiles</code> works in two different ways, either with a &apos;character&apos; vector of (local or online) filenames passed on to <code>x</code> or with <code>list.files</code>-style pattern matching. While the former approach is quite straightforward, the latter requires the function to search the folder <code>dsn</code> for previously downloaded files matching a particular <code>pattern</code> (typically starting with the default setting &quot;^geo&quot;). Importing a sorted vector of already downloaded files from 2013, for instance, would work as follows.</p>
+<pre><code class="lang-r">rearrangeFiles(dsn = paste0(getwd(), <span class="hljs-string">&quot;/data&quot;</span>), 
+               pattern = <span class="hljs-string">&quot;^geo13&quot;</span>)
+</code></pre>
+<pre><code> [1] &quot;geo13jan15a.n19-VI3g&quot; &quot;geo13jan15b.n19-VI3g&quot; &quot;geo13feb15a.n19-VI3g&quot;
+ [4] &quot;geo13feb15b.n19-VI3g&quot; &quot;geo13mar15a.n19-VI3g&quot; &quot;geo13mar15b.n19-VI3g&quot;
+ [7] &quot;geo13apr15a.n19-VI3g&quot; &quot;geo13apr15b.n19-VI3g&quot; &quot;geo13may15a.n19-VI3g&quot;
+[10] &quot;geo13may15b.n19-VI3g&quot; &quot;geo13jun15a.n19-VI3g&quot; &quot;geo13jun15b.n19-VI3g&quot;
+[13] &quot;geo13jul15a.n19-VI3g&quot; &quot;geo13jul15b.n19-VI3g&quot; &quot;geo13aug15a.n19-VI3g&quot;
+[16] &quot;geo13aug15b.n19-VI3g&quot; &quot;geo13sep15a.n19-VI3g&quot; &quot;geo13sep15b.n19-VI3g&quot;
+[19] &quot;geo13oct15a.n19-VI3g&quot; &quot;geo13oct15b.n19-VI3g&quot; &quot;geo13nov15a.n19-VI3g&quot;
+[22] &quot;geo13nov15b.n19-VI3g&quot; &quot;geo13dec15a.n19-VI3g&quot; &quot;geo13dec15b.n19-VI3g&quot;
+</code></pre><h3 id="rasterize-downloaded-data">Rasterize downloaded data</h3>
+<p><code>rasterizeGimms</code> is possibly the core part of the <strong>gimms</strong> package as it transforms the downloaded GIMMS files from native binary format into objects of class &apos;Raster*&apos; which is much easier to handle as compared to ENVI files. The function works with both single and multiple files passed on to <code>x</code> and, in the case of the latter, returns a &apos;RasterStack&apos; rather than a single &apos;RasterLayer&apos;. It is up to the user to decide whether or not to discard &apos;mask-water&apos; values (-10,000) and &apos;mask-nodata&apos; values (-5,000) (see also the <a href="http://ecocast.arc.nasa.gov/data/pub/gimms/3g.v0/00READMEgeo.txt" target="_blank">official README</a>). Also, the application of the scaling factor (1/10,000) is not mandatory. Taking the above set of <code>gimms_files</code> (Jul-Dec 1981) as input vector (notice the <code>full.names</code> argument passed on to <code>list.files</code> in the example below), the function call looks as follows.</p>
+<pre><code class="lang-r"><span class="hljs-comment">## list available files</span>
+gimms_files &lt;- rearrangeFiles(dsn = paste0(getwd(), <span class="hljs-string">&quot;/data&quot;</span>), 
+                              pattern = <span class="hljs-string">&quot;^geo81&quot;</span>, full.names = <span class="hljs-literal">TRUE</span>)
+
+<span class="hljs-comment">## rasterize files</span>
+gimms_raster &lt;- rasterizeGimms(gimms_files, 
+                               filename = gimms_files, 
+                               format = <span class="hljs-string">&quot;GTiff&quot;</span>, overwrite = <span class="hljs-literal">TRUE</span>)
+</code></pre>
+<p>Since this operation usually takes some time, we highly recommend to make use of the <code>filename</code> argument that automatically invokes <code>raster::writeRaster</code>. With a little bit of effort and the help of <strong>RColorBrewer</strong> (Neuwirth, 2014) and <strong>spplot</strong> (Pebesma and Bivand, 2005; Bivand, Pebesma, and Gomez-Rubio, 2013), it is now easy to check whether everything worked out fine.</p>
+<pre><code class="lang-r"><span class="hljs-comment">## adjust layer names</span>
+names(gimms_raster) &lt;- basename(gimms_files)
+
+<span class="hljs-comment">## visualize single layers</span>
+<span class="hljs-keyword">library</span>(RColorBrewer)
+spplot(gimms_raster, 
+       at = seq(-<span class="hljs-number">0.2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0.1</span>), 
+       scales = list(draw = <span class="hljs-literal">TRUE</span>), 
+       col.regions = colorRampPalette(brewer.pal(<span class="hljs-number">11</span>, <span class="hljs-string">&quot;BrBG&quot;</span>)))
+</code></pre>
+<center>
+  <img src="http://i.imgur.com/Qr3FuNr.png" alt="spplot" style="width: 800px;">
+  <br><br><b>Figure 1.</b> Global bi-monthly GIMMS NDVI<sub>3g</sub> images from July to December 2013.
+</center>
+
+<h3 id="create-a-header-file">Create a header file</h3>
+<p>In order to import the GIMMS binary files into R via <code>raster::raster</code>, the creation of header files (.hdr) that are located in the same folder as the binary files staged for processing is mandatory. The standard files required to properly process GIMMS NDVI<sub>3g</sub> data are created via <code>createHeader</code> and typically include the following parameters. </p>
+<pre><code class="lang-r"><span class="hljs-comment">## create gimms ndvi3g standard header file</span>
+gimms_header &lt;- createHeader(<span class="hljs-string">&quot;~/geo13jul15a.n19-VI3g&quot;</span>)
+
+readLines(gimms_header)
+</code></pre>
+<pre><code>[1] &quot;ENVI&quot;
+[1] &quot;description = { R-language data }&quot;
+[1] &quot;samples = 2160&quot;
+[1] &quot;lines = 4320&quot;
+[1] &quot;bands = 1&quot;
+[1] &quot;data type = 2&quot;
+[1] &quot;header offset = 0&quot;
+[1] &quot;interleave = bsq&quot;
+[1] &quot;byte order = 1&quot;
+</code></pre><p>It is possible to automatically remove the created header files once all operations have finished by setting <code>rasterizeGimms(..., remove_header = TRUE)</code>. Although <code>rasterizeGimms</code> automatically invokes <code>createHeader</code>, the function also runs as stand-alone version.</p>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../chapter02/data_download.html" class="navigation navigation-prev " aria-label="Previous page: Data download"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../chapter04/monthly_composites.html" class="navigation navigation-next " aria-label="Next page: Monthly composites"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

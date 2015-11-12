@@ -1,0 +1,402 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Monthly composites | Introducing the R &#39;gimms&#39; package</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.4.0">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="../gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="../chapter05/advanced_applications.html" />
+    
+    
+    <link rel="prev" href="../chapter03/rasterize_data.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book" data-level="4" data-basepath=".." data-revision="Thu Nov 12 2015 09:13:58 GMT+0100 (CET)">
+    
+
+<div class="book-summary">
+    <div class="book-search" role="search">
+        <input type="text" placeholder="Type to search" class="form-control" />
+    </div>
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="../index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="chapter01/introduction.html">
+            
+                
+                    <a href="../chapter01/introduction.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        What&#39;s the story?
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="chapter02/data_download.html">
+            
+                
+                    <a href="../chapter02/data_download.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        Data download
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="chapter03/rasterize_data.html">
+            
+                
+                    <a href="../chapter03/rasterize_data.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        Rasterize data
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="4" data-path="chapter04/monthly_composites.html">
+            
+                
+                    <a href="../chapter04/monthly_composites.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        Monthly composites
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5" data-path="chapter05/advanced_applications.html">
+            
+                
+                    <a href="../chapter05/advanced_applications.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        Advanced applications
+                    </a>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1" data-path="chapter05/parallel_processing.html">
+            
+                
+                    <a href="../chapter05/parallel_processing.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.1.</b>
+                        
+                        &#39;gimms&#39; goes parallel
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="chapter05/mann_kendall.html">
+            
+                
+                    <a href="../chapter05/mann_kendall.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.2.</b>
+                        
+                        Mann-Kendall trend test
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="chapter05/breakpoint_analysis.html">
+            
+                
+                    <a href="../chapter05/breakpoint_analysis.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.3.</b>
+                        
+                        &#39;BFAST&#39; breakpoint analysis
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6" data-path="references.html">
+            
+                
+                    <a href="../references.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.</b>
+                        
+                        References
+                    </a>
+            
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    <a href="#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
+    
+    <div id="font-settings-wrapper" class="dropdown pull-left">
+        <a href="#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+    <div class="dropdown-caret">
+        <span class="caret-outer"></span>
+        <span class="caret-inner"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="button" id="reduce-font-size" class="button size-2">A</button>
+        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
+    </div>
+
+    <div class="buttons font-family-list">
+        <button type="button" data-font="0" class="button">Serif</button>
+        <button type="button" data-font="1" class="button">Sans</button>
+    </div>
+
+    <div class="buttons color-theme-list">
+        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
+        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
+        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Actions Right -->
+    
+    <div class="dropdown pull-right">
+        <a href="#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
+        </a>
+        <div class="dropdown-menu font-settings dropdown-left">
+            <div class="dropdown-caret">
+                <span class="caret-outer"></span>
+                <span class="caret-inner"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" data-sharing="twitter" class="button">
+                    Share on Twitter
+                </button>
+                <button type="button" data-sharing="google-plus" class="button">
+                    Share on Google
+                </button>
+                <button type="button" data-sharing="facebook" class="button">
+                    Share on Facebook
+                </button>
+                <button type="button" data-sharing="weibo" class="button">
+                    Share on Weibo
+                </button>
+                <button type="button" data-sharing="instapaper" class="button">
+                    Share on Instapaper
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <a href="#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+    
+    
+    
+
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../" >Introducing the R &#39;gimms&#39; package</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="monthly-composites">Monthly composites</h1>
+<p>Sometimes, it is required to calculate monthly value composites from the bi-monthly GIMMS datasets, for example if the user needs to ensure temporal overlap with some other ecological or eco-climatological time series. <strong>gimms</strong> features a function called <code>monthlyComposite</code> which works both on vectors of filenames and entire &apos;RasterStack&apos; objects (ideally returned by <code>rasterizeGimms</code>) and calculates monthly values based on a user-defined function. For instance, <code>fun = max</code> creates monthly maximum value composites (MVC). Needless to say, the function is heavily based on <code>stackApply</code> from the fabulous <strong>raster</strong> package and assumes numeric vectors of monthly <code>indices</code> (or text substrings from <code>pos1</code> to <code>pos2</code> from which to deduce such indices, see <code>?monthlyIndices</code>) as input variable. The actual code work is relatively straightforward.</p>
+<pre><code class="lang-r"><span class="hljs-comment">## .tif files created during the previous step</span>
+gimms_files_tif &lt;- rearrangeFiles(dsn = paste0(getwd(), <span class="hljs-string">&quot;/data&quot;</span>), 
+                                  pattern = <span class="hljs-string">&quot;^geo81.*.tif$&quot;</span>, full.names = <span class="hljs-literal">TRUE</span>)
+
+<span class="hljs-comment">## create monthly maximum value composites</span>
+gimms_raster_mvc &lt;- monthlyComposite(gimms_files_tif)
+</code></pre>
+<p>Note that in the above code chunk, <code>rearrangeFiles</code> is used to re-arrange previously created GeoTIFF files according to date. Again and this time with a little help from <strong>reshape2</strong> (Wickham, 2007) and <strong>ggplot2</strong> (Wickham, 2009), the effects from <code>monthlyComposite</code> can easily be seen. Displayed below are the densityplots of all NDVI values during the 1st half of July 1981 (green), during the 2nd half of July 1981 (turquoise) and the resulting MVC values (black).</p>
+<pre><code class="lang-r"><span class="hljs-comment">## concatenate data</span>
+val &lt;- data.frame(<span class="hljs-string">&quot;ndvi_15a&quot;</span> = na.omit(getValues(gimms_raster[[<span class="hljs-number">1</span>]])), 
+                  <span class="hljs-string">&quot;ndvi_15b&quot;</span> = na.omit(getValues(gimms_raster[[<span class="hljs-number">2</span>]])), 
+                  <span class="hljs-string">&quot;ndvi_mvc&quot;</span> = na.omit(getValues(gimms_raster_mvc[[<span class="hljs-number">1</span>]])))
+
+<span class="hljs-comment">## wide to long format</span>
+<span class="hljs-keyword">library</span>(reshape2)
+val_mlt &lt;- melt(val)
+
+<span class="hljs-comment">## colors</span>
+<span class="hljs-keyword">library</span>(devtools)
+install_github(<span class="hljs-string">&quot;environmentalinformatics-marburg/Rsenal&quot;</span>)
+
+<span class="hljs-keyword">library</span>(Rsenal)
+cols &lt;- envinmrPalette(<span class="hljs-number">5</span>)[c(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>)]
+names(cols) &lt;- levels(val_mlt$variable)
+
+<span class="hljs-comment">## linetypes</span>
+ltys &lt;- c(<span class="hljs-string">&quot;solid&quot;</span>, <span class="hljs-string">&quot;solid&quot;</span>, <span class="hljs-string">&quot;longdash&quot;</span>)
+names(ltys) &lt;- levels(val_mlt$variable)
+
+<span class="hljs-comment">## build ggplot</span>
+<span class="hljs-keyword">library</span>(ggplot2)
+ggplot(aes(x = value, group = variable, colour = variable, 
+           linetype = variable), data = val_mlt) + 
+  geom_hline(yintercept = <span class="hljs-number">0</span>, size = <span class="hljs-number">.5</span>, colour = <span class="hljs-string">&quot;grey65&quot;</span>, linetype = <span class="hljs-string">&quot;dashed&quot;</span>) +
+  geom_line(stat = <span class="hljs-string">&quot;density&quot;</span>, size = <span class="hljs-number">1.2</span>) + 
+  scale_colour_manual(<span class="hljs-string">&quot;dataset&quot;</span>, values = cols) + 
+  scale_linetype_manual(<span class="hljs-string">&quot;dataset&quot;</span>, values = ltys) + 
+  labs(x = <span class="hljs-string">&quot;\nNDVI&quot;</span>, y = <span class="hljs-string">&quot;Density\n&quot;</span>) + 
+  theme_bw() + 
+  theme(panel.grid = element_blank(), 
+        legend.key.width = grid::unit(<span class="hljs-number">1.8</span>, <span class="hljs-string">&quot;cm&quot;</span>))
+</code></pre>
+<center>
+  <img src="http://i.imgur.com/wFF8Oqv.png" alt="ggplot" style="width: 650px;">
+  <br><br><b>Figure 2.</b> Kernel density distribution of GIMMS NDVI<sub>3g</sub> values during the first (green) and second half of July 1981 (turquoise) and resulting value distribution of the maximum value composite layer (MVC; black). 
+</center> 
+
+
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../chapter03/rasterize_data.html" class="navigation navigation-prev " aria-label="Previous page: Rasterize data"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../chapter05/advanced_applications.html" class="navigation navigation-next " aria-label="Next page: Advanced applications"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="../gitbook/app.js"></script>
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

@@ -1,0 +1,17 @@
+```{r knitsetup, echo=FALSE, results='hide', warning=FALSE, message=FALSE, cache=FALSE}
+opts_knit$set(base.dir='./', fig.path='', out.format='md')
+opts_chunk$set(prompt=FALSE, comment='', results='markup')
+# See yihui.name/knitr/options for more Knitr options.
+##### Put other setup R code here
+
+
+# end setup chunk
+```
+# Advanced applications
+
+In the following, you will find a compendium of advanced applications and use cases that are not part of the actual package. My plan is to update these pages on a regular basis and provide some fuel for thought for the interested user. 
+
+```{r references, eval = FALSE, echo = FALSE}
+## update bibliography
+knitcitations::write.bibtex(file = "references.bib", append = FALSE)
+```
