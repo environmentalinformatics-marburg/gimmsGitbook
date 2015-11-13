@@ -40,7 +40,7 @@
     <body>
         
         
-    <div class="book" data-level="5.2" data-basepath=".." data-revision="Thu Nov 12 2015 12:51:13 GMT+0100 (CET)">
+    <div class="book" data-level="5.2" data-basepath=".." data-revision="Fri Nov 13 2015 15:15:48 GMT+0100 (CET)">
     
 
 <div class="book-summary">
@@ -319,7 +319,7 @@
                     <section class="normal" id="section-">
                     
                         <h1 id="global-mann-kendall-trend-test">Global Mann-Kendall trend test</h1>
-<p>A function called <code>significantTau</code> has recently been added to <strong>gimms</strong> in order to facilitate the calculation of reliable long-term monotonous trends. It is up to the user to decide whether or not to apply pre-whitening prior to applying the Mann-Kendall trend test in order to account for lag-1 autocorrelation. Currently, the function supports the pre-whitening algorithms proposed by Yue, Pilon, Phinney, et al. (2002) and Zhang, Vincent, Hogg, et al. (2000) which are both included in the <strong>zyp</strong> package (Bronaugh and Werner, 2013). </p>
+<p>The function <code>significantTau</code> has been developed and added to <strong>gimms</strong> to facilitate the calculation of reliable long-term monotonous trends. It is up to the user to decide whether or not to apply pre-whitening prior to the Mann-Kendall trend test in order to account for lag-1 autocorrelation. Currently, the function supports the pre-whitening algorithms proposed by Yue, Pilon, Phinney, et al. (2002) and Zhang, Vincent, Hogg, et al. (2000) which are both included in the <strong>zyp</strong> package (Bronaugh and Werner, 2013). If no pre-whitening is desired, <code>significantTau</code> is merely a wrapper function around <code>MannKendall</code> from <strong>Kendall</strong> (McLeod, 2011).</p>
 <pre><code class="lang-r"><span class="hljs-comment">################################################################################</span>
 <span class="hljs-comment">## download data</span>
 <span class="hljs-comment">################################################################################</span>
@@ -327,9 +327,9 @@
 <span class="hljs-comment">## download entire gimms ndvi3g collection in parallel</span>
 <span class="hljs-keyword">library</span>(doParallel)
 supcl &lt;- makeCluster(<span class="hljs-number">3</span>)
-registerDoParallel(sucl)
+registerDoParallel(supcl)
 
-gimms_files &lt;- updateInventory(sort = <span class="hljs-literal">TRUE</span>)
+gimms_files &lt;- updateInventory()
 gimms_files &lt;- foreach(i = gimms_files, .packages = <span class="hljs-string">&quot;gimms&quot;</span>, 
                        .combine = <span class="hljs-string">&quot;c&quot;</span>) %dopar% downloadGimms(i, dsn = <span class="hljs-string">&quot;data/&quot;</span>)
 
@@ -402,10 +402,9 @@ gimms_raster_deseason &lt;- stack(gimms_list_deseason)
 <span class="hljs-comment">################################################################################</span>
 
 <span class="hljs-comment">## apply custom function on a pixel basis</span>
-gimms_raster_trend &lt;- overlay(gimms_raster_deseason, fun = <span class="hljs-keyword">function</span>(x) {
-  gimms::significantTau(x, prewhitening = <span class="hljs-literal">TRUE</span>, conf.intervals = <span class="hljs-literal">FALSE</span>)
-}, filename = <span class="hljs-string">&quot;data/out/gimms_mk001_8213&quot;</span>, 
-format = <span class="hljs-string">&quot;GTiff&quot;</span>, overwrite = <span class="hljs-literal">TRUE</span>)
+gimms_raster_trend &lt;- significantTau(gimms_raster_deseason, prewhitening = <span class="hljs-literal">TRUE</span>, 
+                                     conf.intervals = <span class="hljs-literal">FALSE</span>, 
+                                     filename = <span class="hljs-string">&quot;data/out/gimms_mk001_8213.tif&quot;</span>)
 
 <span class="hljs-comment">################################################################################</span>
 <span class="hljs-comment">## visualize data</span>

@@ -1,7 +1,7 @@
 
 # Global Mann-Kendall trend test
 
-A function called `significantTau` has recently been added to **gimms** in order to facilitate the calculation of reliable long-term monotonous trends. It is up to the user to decide whether or not to apply pre-whitening prior to applying the Mann-Kendall trend test in order to account for lag-1 autocorrelation. Currently, the function supports the pre-whitening algorithms proposed by Yue, Pilon, Phinney, et al. (2002) and Zhang, Vincent, Hogg, et al. (2000) which are both included in the **zyp** package (Bronaugh and Werner, 2013). 
+The function `significantTau` has been developed and added to **gimms** to facilitate the calculation of reliable long-term monotonous trends. It is up to the user to decide whether or not to apply pre-whitening prior to the Mann-Kendall trend test in order to account for lag-1 autocorrelation. Currently, the function supports the pre-whitening algorithms proposed by Yue, Pilon, Phinney, et al. (2002) and Zhang, Vincent, Hogg, et al. (2000) which are both included in the **zyp** package (Bronaugh and Werner, 2013). If no pre-whitening is desired, `significantTau` is merely a wrapper function around `MannKendall` from **Kendall** (McLeod, 2011).
 
 
 ```r
@@ -12,9 +12,9 @@ A function called `significantTau` has recently been added to **gimms** in order
 ## download entire gimms ndvi3g collection in parallel
 library(doParallel)
 supcl <- makeCluster(3)
-registerDoParallel(sucl)
+registerDoParallel(supcl)
 
-gimms_files <- updateInventory(sort = TRUE)
+gimms_files <- updateInventory()
 gimms_files <- foreach(i = gimms_files, .packages = "gimms", 
                        .combine = "c") %dopar% downloadGimms(i, dsn = "data/")
 
@@ -87,10 +87,9 @@ gimms_raster_deseason <- stack(gimms_list_deseason)
 ################################################################################
 
 ## apply custom function on a pixel basis
-gimms_raster_trend <- overlay(gimms_raster_deseason, fun = function(x) {
-  gimms::significantTau(x, prewhitening = TRUE, conf.intervals = FALSE)
-}, filename = "data/out/gimms_mk001_8213", 
-format = "GTiff", overwrite = TRUE)
+gimms_raster_trend <- significantTau(gimms_raster_deseason, prewhitening = TRUE, 
+                                     conf.intervals = FALSE, 
+                                     filename = "data/out/gimms_mk001_8213.tif")
 
 ################################################################################
 ## visualize data

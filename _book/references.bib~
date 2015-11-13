@@ -35,11 +35,18 @@
   Number                   = {3},
   Pages                    = {245--259},
   Volume                   = {13},
-  Doi                      = {10.2307/1907187},
   Keywords                 = {Time series analysis, Mann-Kendall, trends},
   Owner                    = {fdetsch},
   Timestamp                = {2014.11.05},
   Url                      = {http://www.jstor.org/stable/1907187}
+}
+
+@Manual{McLeod2011,
+  title = {Kendall: Kendall rank correlation and Mann-Kendall trend test},
+  author = {A.I. McLeod},
+  year = {2011},
+  note = {R package version 2.2},
+  url = {http://CRAN.R-project.org/package=Kendall},
 }
 
 @Manual{Neuwirth2014,

@@ -40,7 +40,7 @@
     <body>
         
         
-    <div class="book" data-level="3" data-basepath=".." data-revision="Thu Nov 12 2015 12:51:13 GMT+0100 (CET)">
+    <div class="book" data-level="3" data-basepath=".." data-revision="Fri Nov 13 2015 15:15:48 GMT+0100 (CET)">
     
 
 <div class="book-summary">
@@ -321,25 +321,20 @@
                         <h1 id="rasterize-data">Rasterize data</h1>
 <h3 id="rearrange-files">Rearrange files</h3>
 <p>As mentioned earlier, it is possible to have <code>updateInventory</code> return a vector of filenames sorted by date in ascending order. Sorting the files surely makes sense when it comes to <code>raster::stack</code>-ing continuous observations, calculating monthly composite layers and so forth, but is not necessarily required at the initial stage. <code>updateInventory(sort = TRUE)</code> (the default setting) is merely a wrapper around <code>rearrangeFiles</code> which may as well be executed as a stand-alone version later on. </p>
-<p><code>rearrangeFiles</code> works in two different ways, either with a &apos;character&apos; vector of (local or online) filenames passed on to <code>x</code> or with <code>list.files</code>-style pattern matching. While the former approach is quite straightforward, the latter requires the function to search the folder <code>dsn</code> for previously downloaded files matching a particular <code>pattern</code> (typically starting with the default setting &quot;^geo&quot;). Importing a sorted vector of already downloaded files from 2013, for instance, would work as follows.</p>
-<pre><code class="lang-r">rearrangeFiles(dsn = paste0(getwd(), <span class="hljs-string">&quot;/data&quot;</span>), 
-               pattern = <span class="hljs-string">&quot;^geo13&quot;</span>)
-</code></pre>
-<pre><code> [1] &quot;geo13jan15a.n19-VI3g&quot; &quot;geo13jan15b.n19-VI3g&quot; &quot;geo13feb15a.n19-VI3g&quot;
- [4] &quot;geo13feb15b.n19-VI3g&quot; &quot;geo13mar15a.n19-VI3g&quot; &quot;geo13mar15b.n19-VI3g&quot;
- [7] &quot;geo13apr15a.n19-VI3g&quot; &quot;geo13apr15b.n19-VI3g&quot; &quot;geo13may15a.n19-VI3g&quot;
-[10] &quot;geo13may15b.n19-VI3g&quot; &quot;geo13jun15a.n19-VI3g&quot; &quot;geo13jun15b.n19-VI3g&quot;
-[13] &quot;geo13jul15a.n19-VI3g&quot; &quot;geo13jul15b.n19-VI3g&quot; &quot;geo13aug15a.n19-VI3g&quot;
-[16] &quot;geo13aug15b.n19-VI3g&quot; &quot;geo13sep15a.n19-VI3g&quot; &quot;geo13sep15b.n19-VI3g&quot;
-[19] &quot;geo13oct15a.n19-VI3g&quot; &quot;geo13oct15b.n19-VI3g&quot; &quot;geo13nov15a.n19-VI3g&quot;
-[22] &quot;geo13nov15b.n19-VI3g&quot; &quot;geo13dec15a.n19-VI3g&quot; &quot;geo13dec15b.n19-VI3g&quot;
-</code></pre><h3 id="rasterize-downloaded-data">Rasterize downloaded data</h3>
-<p><code>rasterizeGimms</code> is possibly the core part of the <strong>gimms</strong> package as it transforms the downloaded GIMMS files from native binary format into objects of class &apos;Raster*&apos; which is much easier to handle as compared to ENVI files. The function works with both single and multiple files passed on to <code>x</code> and, in the case of the latter, returns a &apos;RasterStack&apos; rather than a single &apos;RasterLayer&apos;. It is up to the user to decide whether or not to discard &apos;mask-water&apos; values (-10,000) and &apos;mask-nodata&apos; values (-5,000) (see also the <a href="http://ecocast.arc.nasa.gov/data/pub/gimms/3g.v0/00READMEgeo.txt" target="_blank">official README</a>). Also, the application of the scaling factor (1/10,000) is not mandatory. Taking the above set of <code>gimms_files</code> (Jul-Dec 1981) as input vector (notice the <code>full.names</code> argument passed on to <code>list.files</code> in the example below), the function call looks as follows.</p>
-<pre><code class="lang-r"><span class="hljs-comment">## list available files</span>
-gimms_files &lt;- rearrangeFiles(dsn = paste0(getwd(), <span class="hljs-string">&quot;/data&quot;</span>), 
-                              pattern = <span class="hljs-string">&quot;^geo81&quot;</span>, full.names = <span class="hljs-literal">TRUE</span>)
+<p><code>rearrangeFiles</code> works in two different ways, either with a &apos;character&apos; vector of (local or online) filenames passed on to <code>x</code> or with <code>list.files</code>-style pattern matching. While the former approach is quite straightforward, the latter requires the function to search the folder <code>dsn</code> for previously downloaded files matching a particular <code>pattern</code> (typically starting with the default setting &quot;^geo&quot;). Importing a sorted vector of already downloaded files from Jul-Dec 1981, for instance, would work as follows.</p>
+<pre><code class="lang-r">gimms_files &lt;- rearrangeFiles(dsn = paste0(getwd(), <span class="hljs-string">&quot;/data&quot;</span>), 
+                              pattern = <span class="hljs-string">&quot;^geo81.*VI3g$&quot;</span>, 
+                              full.names = <span class="hljs-literal">TRUE</span>)
 
-<span class="hljs-comment">## rasterize files</span>
+basename(gimms_files)
+</code></pre>
+<pre><code> [1] &quot;geo81jul15a.n07-VI3g&quot; &quot;geo81jul15b.n07-VI3g&quot; &quot;geo81aug15a.n07-VI3g&quot;
+ [4] &quot;geo81aug15b.n07-VI3g&quot; &quot;geo81sep15a.n07-VI3g&quot; &quot;geo81sep15b.n07-VI3g&quot;
+ [7] &quot;geo81oct15a.n07-VI3g&quot; &quot;geo81oct15b.n07-VI3g&quot; &quot;geo81nov15a.n07-VI3g&quot;
+[10] &quot;geo81nov15b.n07-VI3g&quot; &quot;geo81dec15a.n07-VI3g&quot; &quot;geo81dec15b.n07-VI3g&quot;
+</code></pre><h3 id="rasterize-downloaded-data">Rasterize downloaded data</h3>
+<p><code>rasterizeGimms</code> is possibly the core part of the <strong>gimms</strong> package as it transforms the downloaded GIMMS files from native binary format into objects of class &apos;Raster*&apos; which is much easier to handle as compared to ENVI files. The function works with both single and multiple files passed on to <code>x</code> and, in the case of the latter, returns a &apos;RasterStack&apos; rather than a single &apos;RasterLayer&apos;. It is up to the user to decide whether or not to discard &apos;mask-water&apos; values (-10,000) and &apos;mask-nodata&apos; values (-5,000) (see also the <a href="http://ecocast.arc.nasa.gov/data/pub/gimms/3g.v0/00READMEgeo.txt" target="_blank">official README</a>). Also, the application of the scaling factor (1/10,000) is not mandatory. Taking the above set of <code>gimms_files</code> (Jul-Dec 1981) as input vector (notice the <code>full.names</code> argument passed on to <code>list.files</code> in the example above), the function call looks as follows.</p>
+<pre><code class="lang-r"><span class="hljs-comment">## rasterize files</span>
 gimms_raster &lt;- rasterizeGimms(gimms_files, 
                                filename = gimms_files, 
                                format = <span class="hljs-string">&quot;GTiff&quot;</span>, overwrite = <span class="hljs-literal">TRUE</span>)
@@ -363,7 +358,7 @@ spplot(gimms_raster,
 <h3 id="create-a-header-file">Create a header file</h3>
 <p>In order to import the GIMMS binary files into R via <code>raster::raster</code>, the creation of header files (.hdr) that are located in the same folder as the binary files staged for processing is mandatory. The standard files required to properly process GIMMS NDVI<sub>3g</sub> data are created via <code>createHeader</code> and typically include the following parameters. </p>
 <pre><code class="lang-r"><span class="hljs-comment">## create gimms ndvi3g standard header file</span>
-gimms_header &lt;- createHeader(<span class="hljs-string">&quot;~/geo13jul15a.n19-VI3g&quot;</span>)
+gimms_header &lt;- createHeader(paste0(getwd(), <span class="hljs-string">&quot;/geo13jul15a.n19-VI3g&quot;</span>))
 
 readLines(gimms_header)
 </code></pre>
@@ -376,7 +371,7 @@ readLines(gimms_header)
 [1] &quot;header offset = 0&quot;
 [1] &quot;interleave = bsq&quot;
 [1] &quot;byte order = 1&quot;
-</code></pre><p>It is possible to automatically remove the created header files once all operations have finished by setting <code>rasterizeGimms(..., remove_header = TRUE)</code>. Although <code>rasterizeGimms</code> automatically invokes <code>createHeader</code>, the function also runs as stand-alone version.</p>
+</code></pre><p>Note that <code>rasterizeGimms</code> automatically creates the header files corresponding to each file in &apos;gimms_files&apos; and therefore, you shouldn&apos;t be required to run the standalone verion of the function unless you are interested in it. In addition, it is possible to automatically remove the created header files once all operations have finished by setting <code>rasterizeGimms(..., remove_header = TRUE)</code>. </p>
 
                     
                     </section>

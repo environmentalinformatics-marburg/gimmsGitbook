@@ -19,6 +19,7 @@ The **gimms** package (currently version 0.2.0) is now officially on CRAN and ca
 ```r
 ## install latest stable package release
 install.packages("gimms")
+library(gimms)
 ```
 
 The development version including latest functionality updates, bug-fixes etc. can be installed directly from GitHub via **devtools** (Wickham and Chang, 2015). Make sure to check out the [introductory page](https://github.com/environmentalinformatics-marburg/gimms) for the latest news and updates!

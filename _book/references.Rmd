@@ -1,9 +1,21 @@
+```{r knitsetup, echo=FALSE, results='hide', warning=FALSE, message=FALSE, cache=FALSE}
+opts_knit$set(base.dir='./', fig.path='', out.format='md')
+opts_chunk$set(prompt=FALSE, comment='', results='markup')
+# See yihui.name/knitr/options for more Knitr options.
+##### Put other setup R code here
+
+library(knitcitations)
+options("citation_format" = "compatibility")
+bib <- read.bibtex("references.bib")
+
+# end setup chunk
+```
 # References
 
-```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
-# Uncomment to list all items in the BibTeX file.
-#for(i in names(bib)) { print(i); citep(bib[i]) }
-```
+All in-text citations as well as the below bibliography have been created using the **knitcitations** package `r citep(bib["Boettiger2015"])`.
+
+<hr>
+
 ```{r bibliography, echo=FALSE, results='asis'}
 knitcitations::bibliography()
 ```

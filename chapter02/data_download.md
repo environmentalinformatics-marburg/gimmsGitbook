@@ -6,7 +6,7 @@ For any subsequent processing steps, it is helpful to know which bi-monthly file
 
 
 ```r
-gimms_files <- updateInventory(sort = TRUE)
+gimms_files <- updateInventory()
 head(gimms_files)
 ```
 
