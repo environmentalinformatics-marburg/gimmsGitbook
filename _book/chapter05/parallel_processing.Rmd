@@ -12,7 +12,7 @@ bib <- read.bibtex("../references.bib")
 ```
 # 'gimms' goes parallel
 
-At this point, it is time for some considerations on code performance. I constructed the single **gimms** functions to the best of my knowledge, but there is still room for further speed gains, which particularly applies to data download and rasterization. If you are not already familiar with the basic principles of how to go parallel in R, this [short tutorial on G-Forge](http://gforge.se/2015/02/how-to-go-parallel-in-r-basics-tips/) will provide you with valuable insights.
+At this point, it is time for some considerations on code performance. With the most recent update to version 0.4.0, certain **gimms** functions support parallel computation, meaning that the code can be expected to perform considerably faster now. I first tested this functionality using solely the built-in **parallel** package, but it has shown that certain operations, while running quite fast on Linux, took even longer to perform than their single-core counterparts on Windows. Anyway, most of the parallelized code now employs a combination of **foreach** and **doParallel** which results in reasonable speed gains. Among the functions offering a multi-core option are `downloadGimms`, `rasterizeGimms` and `monthlyComposite`. 
 
 <center>
   <img src="https://i2.wp.com/gforge.se/wp-content/uploads/2015/02/Horse_power_smudge_9000.jpg" alt="parallel" style="width: 500px;"/><br>
@@ -21,42 +21,28 @@ At this point, it is time for some considerations on code performance. I constru
 
 ### Parallel downloads
 
-Provided that you have a sufficiently fast active internet connection, it is quite easy to distribute the actual GIMMS download procedure to multiple nodes. Say you want to download all files from the first half of the year 2000, the standard approach would look as follows. 
+Note that in case of `downloadGimms`, an adequately fast active internect connection is required in order to accomplish multiple high-speed downloads in parallel. For instance, if you want to retrieve all files from the year 2000, the standard approach looks as follows. 
 
 ```{r download, eval = FALSE}
 system.time(
-  local_files <- downloadGimms(x = as.Date("2000-01-01"), y = as.Date("2000-06-30"), 
+  local_files <- downloadGimms(x = as.Date("2000-01-01"), 
+                               y = as.Date("2000-12-31"), 
                                dsn = paste0(getwd(), "/data"), overwrite = TRUE)
 )
 #   user  system elapsed 
 #  0.336   2.736  84.654 
 ```
 
-And here is the parallel version which, on my machine and with my internet connections, performs roughly 2.5 times faster.
+And here is the parallel version which operates on 3 nodes (note the newly introduced 'cores' argument) and, at least on my machine and using my internet connection, performs roughly 2.5 times faster.
 
 ```{r download_parallel, eval = FALSE}
-system.time({
-  ## avl files
-  gimms_files <- updateInventory()
-  ## files from 2000
-  gimms_files <- gimms_files[grep("geo00", gimms_files)]
-  ## files from jan-jun
-  gimms_files <- gimms_files[1:12]
+system.time(
+  local_files <- downloadGimms(x = as.Date("2000-01-01"), 
+                               y = as.Date("2000-12-31"), 
+                               dsn = paste0(getwd(), "/data"), overwrite = TRUE, 
+                               cores = 3L)
   
-  ## initialize parallel backend with 3 nodes
-  library(doParallel)
-  cl <- makeCluster(3)
-  registerDoParallel(cl)
-  
-  ## download single files
-  local_files <- foreach(i = gimms_files, .combine = "c", 
-                         .packages = "gimms") %dopar% {
-    downloadGimms(i, dsn = paste0(getwd(), "/data"), overwrite = TRUE)
-  }
-  
-  ## close parallel backend
-  stopCluster(cl)
-})
+)
 #   user  system elapsed 
 #  0.181   0.154  32.919 
 ```
