@@ -35,6 +35,9 @@ gimms_raster <- rasterizeGimms(gimms_files,
 ```
 
 
+```
+Error in compareRaster(rasters): different extent
+```
 
 Since this operation usually takes some time, we highly recommend to make use of the `filename` argument that automatically invokes `raster::writeRaster`. With a little bit of effort and the help of **RColorBrewer** (Neuwirth, 2014) and **spplot** (Pebesma and Bivand, 2005; Bivand, Pebesma, and Gomez-Rubio, 2013), it is now easy to check whether everything worked out fine.
 
@@ -57,13 +60,12 @@ spplot(gimms_raster,
 </center>
 
 ### Create a header file
-In order to import the GIMMS binary files into R via `raster::raster`, the creation of header files (.hdr) that are located in the same folder as the binary files staged for processing is mandatory. The standard files required to properly process GIMMS NDVI<sub>3g</sub> data are created via `createHeader` and typically include the following parameters. 
+In order to import the GIMMS binary files into R via `raster::raster`, the creation of header files (.hdr) that are located in the same folder as the binary files staged for processing is mandatory. The standard files required to properly process GIMMS NDVI<sub>3g</sub> data are created via the non-exported `createHeader` function and typically include the following parameters. 
 
 
 ```r
 ## create gimms ndvi3g standard header file
-gimms_header <- createHeader(paste0(getwd(), "/geo13jul15a.n19-VI3g"))
-
+gimms_header <- gimms:::createHeader(paste0(getwd(), "/geo13jul15a.n19-VI3g"))
 readLines(gimms_header)
 ```
 
@@ -77,7 +79,8 @@ readLines(gimms_header)
 [1] "data type = 2"
 [1] "header offset = 0"
 [1] "interleave = bsq"
+[1] "sensor type = AVHRR"
 [1] "byte order = 1"
 ```
 
-Note that `rasterizeGimms` automatically creates the header files corresponding to each file in 'gimms_files' and therefore, you shouldn't be required to run the standalone verion of the function unless you are interested in it. In addition, it is possible to automatically remove the created header files once all operations have finished by setting `rasterizeGimms(..., remove_header = TRUE)`. 
+The function is not explicitly exported since `rasterizeGimms` automatically creates the header files corresponding to each of the specified input files. Hence, you shouldn't be required to run the standalone version of the function unless you are interested in it. Note that it is also possible to automatically remove all the header files upon process completion by setting `rasterizeGimms(..., remove_header = TRUE)`. 

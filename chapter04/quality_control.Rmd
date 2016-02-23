@@ -1,0 +1,83 @@
+```{r knitsetup, echo=FALSE, results='hide', warning=FALSE, message=FALSE, cache=FALSE}
+opts_knit$set(base.dir='./', fig.path='', out.format='md')
+opts_chunk$set(prompt=FALSE, comment='', results='markup')
+# See yihui.name/knitr/options for more Knitr options.
+##### Put other setup R code here
+
+library(knitcitations)
+options("citation_format" = "compatibility")
+bib <- read.bibtex("../references.bib")
+
+# end setup chunk
+```
+
+# Quality control
+
+Using the default settings, `rasterizeGimms` creates proper `Raster*` objects from the ENVI binary images. Associated with each half-monthly NDVI<sub>3g</sub> dataset is a quality flag layer indicating the data reliability on a pixel basis. The flag values are as follows (taken from <http://ecocast.arc.nasa.gov/data/pub/gimms/3g.v0/00READMEgeo.txt>):
+  
+  Flag value      | <div align="left">Description</div>
+    --------------- | -----------    
+    1 and 2 | good value
+  3 | value derived from spline interpolation
+  4 | value derived from spline interpolation, possibly snow
+  5 | value derived from average seasonal profile
+  6 | value derived from average seasonal profile, possibly snow
+  7 | missing value
+  
+Quality control can easily be carried out by invoking the function `qualityControl` which works both on binary files and already rasterized images. With regard to memory usage, however, we strongly advice to create NDVI and flag layers separately via `rasterizeGimms` (with `filename` provided) and use these as input for `qualityControl`.   
+
+```{r available_files, echo = FALSE}
+gimms_files <- rearrangeFiles(full.names = TRUE, dsn = "/media/permanent/programming/r/gimms/data/", 
+                              pattern = "^geo81.*VI3g$")
+```
+
+```{r quality_control}
+ndvi <- rasterizeGimms(gimms_files[1])
+flag <- rasterizeGimms(gimms_files[1], flag = TRUE)
+
+qc <- qualityControl(ndvi, flag)
+```
+
+```{r visualize, echo = FALSE}
+library(RColorBrewer)
+library(grid)
+library(lattice)
+
+p_ndvi <- spplot(ndvi, col.regions = colorRampPalette(brewer.pal(11, "BrBG")), 
+                 at = seq(-0.2, 1, 0.01), scales = list(draw = TRUE), 
+                 colorkey = list(space = "top", width = .6, height = .6))
+p_flag <- spplot(flag, col.regions = terrain.colors(7), at = .5:7.5, 
+                 scales = list(draw = TRUE, 
+                               y = list(col = "transparent")), 
+                 colorkey = list(space = "top", width = .6, height = .6))
+p_qc <- spplot(qc, col.regions = colorRampPalette(brewer.pal(11, "BrBG")), 
+                 at = seq(-0.2, 1, 0.01), scales = list(draw = TRUE), 
+               colorkey = list(space = "bottom", width = .6, height = .6))
+
+## ndvi
+grid.newpage()
+vp_ndvi <- viewport(x = 0, y = .45, width = .55, height = .55, 
+                    just = c("left", "bottom"))
+pushViewport(vp_ndvi)
+print(p_ndvi, newpage = FALSE)
+downViewport(trellis.vpname("figure"))
+grid.text("a) Raw NDVI", x = .5, y = 1.55, gp = gpar(cex = .8))
+
+## flag
+upViewport(0)
+vp_flag <- viewport(x = .45, y = .45, width = .55, height = .55, 
+                    just = c("left", "bottom"))
+pushViewport(vp_flag)
+print(p_flag, newpage = FALSE)
+downViewport(trellis.vpname("figure"))
+grid.text("b) Flags", x = .5, y = 1.55, gp = gpar(cex = .8))
+
+## qc
+upViewport(0)
+vp_qc <- viewport(x = 0, y = 0.01, width = 1, height = .625, 
+                  just = c("left", "bottom"))
+pushViewport(vp_qc)
+print(p_qc, newpage = FALSE)
+downViewport(trellis.vpname("figure"))
+grid.text("c) Quality-controlled NDVI", x = .5, y = -.29, gp = gpar(cex = .8))
+```

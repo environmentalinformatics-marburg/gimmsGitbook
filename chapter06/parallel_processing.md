@@ -1,7 +1,7 @@
 
 # 'gimms' goes parallel
 
-At this point, it is time for some considerations on code performance. With the most recent update to version 0.4.0, certain **gimms** functions support parallel computation, meaning that the code can be expected to perform considerably faster now. I first tested this functionality using solely the built-in **parallel** package, but it has shown that certain operations, while running quite fast on Linux, took even longer to perform than their single-core counterparts on Windows. Anyway, most of the parallelized code now employs a combination of **foreach** and **doParallel** which results in reasonable speed gains. Among the functions offering a multi-core option are `downloadGimms`, `rasterizeGimms` and `monthlyComposite`. 
+At this point, it is time for some considerations on code performance. Starting from version 0.5.0, certain **gimms** functions support parallel computation, meaning that the code can be expected to perform considerably faster now. I first tested this functionality using solely the built-in **parallel** package, but it has shown that certain operations, while running quite fast on Linux, took even longer to perform than their single-core counterparts on Windows. Anyway, most of the parallelized code now employs a combination of **foreach** and **doParallel** which results in reasonable speed gains. Among the functions offering a multi-core option are `downloadGimms`, `rasterizeGimms` and `monthlyComposite`. 
 
 <center>
   <img src="https://i2.wp.com/gforge.se/wp-content/uploads/2015/02/Horse_power_smudge_9000.jpg" alt="parallel" style="width: 500px;"/><br>

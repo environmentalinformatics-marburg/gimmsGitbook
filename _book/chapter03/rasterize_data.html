@@ -29,7 +29,7 @@
         
     
     
-    <link rel="next" href="../chapter04/monthly_composites.html" />
+    <link rel="next" href="../chapter04/quality_control.html" />
     
     
     <link rel="prev" href="../chapter02/data_download.html" />
@@ -40,7 +40,7 @@
     <body>
         
         
-    <div class="book" data-level="3" data-basepath=".." data-revision="Fri Dec 18 2015 14:26:36 GMT+0100 (CET)">
+    <div class="book" data-level="3" data-basepath=".." data-revision="Tue Feb 23 2016 13:27:13 GMT+0100 (CET)">
     
 
 <div class="book-summary">
@@ -116,14 +116,29 @@
             
         </li>
     
-        <li class="chapter " data-level="4" data-path="chapter04/monthly_composites.html">
+        <li class="chapter " data-level="4" data-path="chapter04/quality_control.html">
             
                 
-                    <a href="../chapter04/monthly_composites.html">
+                    <a href="../chapter04/quality_control.html">
                 
                         <i class="fa fa-check"></i>
                         
                             <b>4.</b>
+                        
+                        Quality control
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5" data-path="chapter05/monthly_composites.html">
+            
+                
+                    <a href="../chapter05/monthly_composites.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
                         
                         Monthly composites
                     </a>
@@ -131,14 +146,14 @@
             
         </li>
     
-        <li class="chapter " data-level="5" data-path="chapter05/advanced_applications.html">
+        <li class="chapter " data-level="6" data-path="chapter06/advanced_applications.html">
             
                 
-                    <a href="../chapter05/advanced_applications.html">
+                    <a href="../chapter06/advanced_applications.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>5.</b>
+                            <b>6.</b>
                         
                         Advanced applications
                     </a>
@@ -147,14 +162,14 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="5.1" data-path="chapter05/parallel_processing.html">
+        <li class="chapter " data-level="6.1" data-path="chapter06/parallel_processing.html">
             
                 
-                    <a href="../chapter05/parallel_processing.html">
+                    <a href="../chapter06/parallel_processing.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>5.1.</b>
+                            <b>6.1.</b>
                         
                         &#39;gimms&#39; goes parallel
                     </a>
@@ -162,14 +177,14 @@
             
         </li>
     
-        <li class="chapter " data-level="5.2" data-path="chapter05/mann_kendall.html">
+        <li class="chapter " data-level="6.2" data-path="chapter06/mann_kendall.html">
             
                 
-                    <a href="../chapter05/mann_kendall.html">
+                    <a href="../chapter06/mann_kendall.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>5.2.</b>
+                            <b>6.2.</b>
                         
                         Mann-Kendall trend test
                     </a>
@@ -177,14 +192,14 @@
             
         </li>
     
-        <li class="chapter " data-level="5.3" data-path="chapter05/breakpoint_analysis.html">
+        <li class="chapter " data-level="6.3" data-path="chapter06/breakpoint_analysis.html">
             
                 
-                    <a href="../chapter05/breakpoint_analysis.html">
+                    <a href="../chapter06/breakpoint_analysis.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>5.3.</b>
+                            <b>6.3.</b>
                         
                         &#39;BFAST&#39; breakpoint analysis
                     </a>
@@ -197,14 +212,14 @@
             
         </li>
     
-        <li class="chapter " data-level="6" data-path="references.html">
+        <li class="chapter " data-level="7" data-path="references.html">
             
                 
                     <a href="../references.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>6.</b>
+                            <b>7.</b>
                         
                         References
                     </a>
@@ -339,7 +354,8 @@ gimms_raster &lt;- rasterizeGimms(gimms_files,
                                filename = gimms_files, 
                                format = <span class="hljs-string">&quot;GTiff&quot;</span>, overwrite = <span class="hljs-literal">TRUE</span>)
 </code></pre>
-<p>Since this operation usually takes some time, we highly recommend to make use of the <code>filename</code> argument that automatically invokes <code>raster::writeRaster</code>. With a little bit of effort and the help of <strong>RColorBrewer</strong> (Neuwirth, 2014) and <strong>spplot</strong> (Pebesma and Bivand, 2005; Bivand, Pebesma, and Gomez-Rubio, 2013), it is now easy to check whether everything worked out fine.</p>
+<pre><code>Error in compareRaster(rasters): different extent
+</code></pre><p>Since this operation usually takes some time, we highly recommend to make use of the <code>filename</code> argument that automatically invokes <code>raster::writeRaster</code>. With a little bit of effort and the help of <strong>RColorBrewer</strong> (Neuwirth, 2014) and <strong>spplot</strong> (Pebesma and Bivand, 2005; Bivand, Pebesma, and Gomez-Rubio, 2013), it is now easy to check whether everything worked out fine.</p>
 <pre><code class="lang-r"><span class="hljs-comment">## adjust layer names</span>
 names(gimms_raster) &lt;- basename(gimms_files)
 
@@ -356,10 +372,9 @@ spplot(gimms_raster,
 </center>
 
 <h3 id="create-a-header-file">Create a header file</h3>
-<p>In order to import the GIMMS binary files into R via <code>raster::raster</code>, the creation of header files (.hdr) that are located in the same folder as the binary files staged for processing is mandatory. The standard files required to properly process GIMMS NDVI<sub>3g</sub> data are created via <code>createHeader</code> and typically include the following parameters. </p>
+<p>In order to import the GIMMS binary files into R via <code>raster::raster</code>, the creation of header files (.hdr) that are located in the same folder as the binary files staged for processing is mandatory. The standard files required to properly process GIMMS NDVI<sub>3g</sub> data are created via the non-exported <code>createHeader</code> function and typically include the following parameters. </p>
 <pre><code class="lang-r"><span class="hljs-comment">## create gimms ndvi3g standard header file</span>
-gimms_header &lt;- createHeader(paste0(getwd(), <span class="hljs-string">&quot;/geo13jul15a.n19-VI3g&quot;</span>))
-
+gimms_header &lt;- gimms:::createHeader(paste0(getwd(), <span class="hljs-string">&quot;/geo13jul15a.n19-VI3g&quot;</span>))
 readLines(gimms_header)
 </code></pre>
 <pre><code>[1] &quot;ENVI&quot;
@@ -370,8 +385,9 @@ readLines(gimms_header)
 [1] &quot;data type = 2&quot;
 [1] &quot;header offset = 0&quot;
 [1] &quot;interleave = bsq&quot;
+[1] &quot;sensor type = AVHRR&quot;
 [1] &quot;byte order = 1&quot;
-</code></pre><p>Note that <code>rasterizeGimms</code> automatically creates the header files corresponding to each file in &apos;gimms_files&apos; and therefore, you shouldn&apos;t be required to run the standalone verion of the function unless you are interested in it. In addition, it is possible to automatically remove the created header files once all operations have finished by setting <code>rasterizeGimms(..., remove_header = TRUE)</code>. </p>
+</code></pre><p>The function is not explicitly exported since <code>rasterizeGimms</code> automatically creates the header files corresponding to each of the specified input files. Hence, you shouldn&apos;t be required to run the standalone version of the function unless you are interested in it. Note that it is also possible to automatically remove all the header files upon process completion by setting <code>rasterizeGimms(..., remove_header = TRUE)</code>. </p>
 
                     
                     </section>
@@ -385,7 +401,7 @@ readLines(gimms_header)
         <a href="../chapter02/data_download.html" class="navigation navigation-prev " aria-label="Previous page: Data download"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../chapter04/monthly_composites.html" class="navigation navigation-next " aria-label="Next page: Monthly composites"><i class="fa fa-angle-right"></i></a>
+        <a href="../chapter04/quality_control.html" class="navigation navigation-next " aria-label="Next page: Quality control"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

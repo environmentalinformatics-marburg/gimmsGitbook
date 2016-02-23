@@ -12,6 +12,7 @@ The R **gimms** package provides a set of functions to
 * retrieve information about GIMMS NDVI<sub>3g</sub> files currently available online; 
 * download and re-arrange the bi-monthly datasets according to date; 
 * import downloaded files from native binary (ENVI) format directly into R based on the widely applied **raster** package; 
+* perform quality control based on the companion quality flags;
 * calculate monthly value composites (e.g., maximum value composites, MVC) from the bi-monthly input data;
 * and derive long-term monotonous trends from the Mann-Kendall trend test, optionally featuring pre-whitening to account for lag-1 autocorrelation.
     

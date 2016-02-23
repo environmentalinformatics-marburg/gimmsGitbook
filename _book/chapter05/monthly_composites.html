@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>&#39;gimms&#39; goes parallel | Introducing the R &#39;gimms&#39; package</title>
+        <title>Monthly composites | Introducing the R &#39;gimms&#39; package</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.4.0">
@@ -29,10 +29,10 @@
         
     
     
-    <link rel="next" href="../chapter05/mann_kendall.html" />
+    <link rel="next" href="../chapter06/advanced_applications.html" />
     
     
-    <link rel="prev" href="../chapter05/advanced_applications.html" />
+    <link rel="prev" href="../chapter04/quality_control.html" />
     
 
         
@@ -40,7 +40,7 @@
     <body>
         
         
-    <div class="book" data-level="5.1" data-basepath=".." data-revision="Fri Dec 18 2015 14:26:36 GMT+0100 (CET)">
+    <div class="book" data-level="5" data-basepath=".." data-revision="Tue Feb 23 2016 13:27:13 GMT+0100 (CET)">
     
 
 <div class="book-summary">
@@ -116,14 +116,29 @@
             
         </li>
     
-        <li class="chapter " data-level="4" data-path="chapter04/monthly_composites.html">
+        <li class="chapter " data-level="4" data-path="chapter04/quality_control.html">
             
                 
-                    <a href="../chapter04/monthly_composites.html">
+                    <a href="../chapter04/quality_control.html">
                 
                         <i class="fa fa-check"></i>
                         
                             <b>4.</b>
+                        
+                        Quality control
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="5" data-path="chapter05/monthly_composites.html">
+            
+                
+                    <a href="../chapter05/monthly_composites.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
                         
                         Monthly composites
                     </a>
@@ -131,14 +146,14 @@
             
         </li>
     
-        <li class="chapter " data-level="5" data-path="chapter05/advanced_applications.html">
+        <li class="chapter " data-level="6" data-path="chapter06/advanced_applications.html">
             
                 
-                    <a href="../chapter05/advanced_applications.html">
+                    <a href="../chapter06/advanced_applications.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>5.</b>
+                            <b>6.</b>
                         
                         Advanced applications
                     </a>
@@ -147,14 +162,14 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="5.1" data-path="chapter05/parallel_processing.html">
+        <li class="chapter " data-level="6.1" data-path="chapter06/parallel_processing.html">
             
                 
-                    <a href="../chapter05/parallel_processing.html">
+                    <a href="../chapter06/parallel_processing.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>5.1.</b>
+                            <b>6.1.</b>
                         
                         &#39;gimms&#39; goes parallel
                     </a>
@@ -162,14 +177,14 @@
             
         </li>
     
-        <li class="chapter " data-level="5.2" data-path="chapter05/mann_kendall.html">
+        <li class="chapter " data-level="6.2" data-path="chapter06/mann_kendall.html">
             
                 
-                    <a href="../chapter05/mann_kendall.html">
+                    <a href="../chapter06/mann_kendall.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>5.2.</b>
+                            <b>6.2.</b>
                         
                         Mann-Kendall trend test
                     </a>
@@ -177,14 +192,14 @@
             
         </li>
     
-        <li class="chapter " data-level="5.3" data-path="chapter05/breakpoint_analysis.html">
+        <li class="chapter " data-level="6.3" data-path="chapter06/breakpoint_analysis.html">
             
                 
-                    <a href="../chapter05/breakpoint_analysis.html">
+                    <a href="../chapter06/breakpoint_analysis.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>5.3.</b>
+                            <b>6.3.</b>
                         
                         &#39;BFAST&#39; breakpoint analysis
                     </a>
@@ -197,14 +212,14 @@
             
         </li>
     
-        <li class="chapter " data-level="6" data-path="references.html">
+        <li class="chapter " data-level="7" data-path="references.html">
             
                 
                     <a href="../references.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>6.</b>
+                            <b>7.</b>
                         
                         References
                     </a>
@@ -318,76 +333,54 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="-gimms-goes-parallel">&apos;gimms&apos; goes parallel</h1>
-<p>At this point, it is time for some considerations on code performance. With the most recent update to version 0.4.0, certain <strong>gimms</strong> functions support parallel computation, meaning that the code can be expected to perform considerably faster now. I first tested this functionality using solely the built-in <strong>parallel</strong> package, but it has shown that certain operations, while running quite fast on Linux, took even longer to perform than their single-core counterparts on Windows. Anyway, most of the parallelized code now employs a combination of <strong>foreach</strong> and <strong>doParallel</strong> which results in reasonable speed gains. Among the functions offering a multi-core option are <code>downloadGimms</code>, <code>rasterizeGimms</code> and <code>monthlyComposite</code>. </p>
+                        <h1 id="monthly-composites">Monthly composites</h1>
+<p>Sometimes, it is required to calculate monthly value composites from the bi-monthly GIMMS datasets, for example if the user needs to ensure temporal overlap with some other ecological or eco-climatological time series. <strong>gimms</strong> features a function called <code>monthlyComposite</code> which works both on vectors of filenames and entire &apos;RasterStack&apos; objects (ideally returned by <code>rasterizeGimms</code>) and calculates monthly values based on a user-defined function. For instance, <code>fun = max</code> creates monthly maximum value composites (MVC). Needless to say, the function is heavily based on <code>stackApply</code> from the fabulous <strong>raster</strong> package and assumes numeric vectors of monthly <code>indices</code> (or text substrings from <code>pos1</code> to <code>pos2</code> from which to deduce such indices, see <code>?monthlyIndices</code>) as input variable. The actual code work is relatively straightforward.</p>
+<pre><code class="lang-r"><span class="hljs-comment">## .tif files created during the previous step</span>
+gimms_files_tif &lt;- rearrangeFiles(dsn = paste0(getwd(), <span class="hljs-string">&quot;/data&quot;</span>), 
+                                  pattern = <span class="hljs-string">&quot;^geo81.*.tif$&quot;</span>, full.names = <span class="hljs-literal">TRUE</span>)
+
+<span class="hljs-comment">## create monthly maximum value composites</span>
+gimms_raster_mvc &lt;- monthlyComposite(gimms_files_tif)
+</code></pre>
+<p>Note that in the above code chunk, <code>rearrangeFiles</code> is used to re-arrange previously created GeoTIFF files according to date. Again and this time with a little help from <strong>reshape2</strong> (Wickham, 2007) and <strong>ggplot2</strong> (Wickham, 2009), the effects from <code>monthlyComposite</code> can easily be seen. Displayed below are the densityplots of all NDVI values during the 1st half of July 1981 (green), during the 2nd half of July 1981 (turquoise) and the resulting MVC values (black).</p>
+<pre><code class="lang-r"><span class="hljs-comment">## concatenate data</span>
+val &lt;- data.frame(<span class="hljs-string">&quot;ndvi_15a&quot;</span> = na.omit(getValues(gimms_raster[[<span class="hljs-number">1</span>]])), 
+                  <span class="hljs-string">&quot;ndvi_15b&quot;</span> = na.omit(getValues(gimms_raster[[<span class="hljs-number">2</span>]])), 
+                  <span class="hljs-string">&quot;ndvi_mvc&quot;</span> = na.omit(getValues(gimms_raster_mvc[[<span class="hljs-number">1</span>]])))
+
+<span class="hljs-comment">## wide to long format</span>
+<span class="hljs-keyword">library</span>(reshape2)
+val_mlt &lt;- melt(val)
+
+<span class="hljs-comment">## colors</span>
+<span class="hljs-keyword">library</span>(devtools)
+install_github(<span class="hljs-string">&quot;environmentalinformatics-marburg/Rsenal&quot;</span>)
+
+<span class="hljs-keyword">library</span>(Rsenal)
+cols &lt;- envinmrPalette(<span class="hljs-number">5</span>)[c(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>)]
+names(cols) &lt;- levels(val_mlt$variable)
+
+<span class="hljs-comment">## linetypes</span>
+ltys &lt;- c(<span class="hljs-string">&quot;solid&quot;</span>, <span class="hljs-string">&quot;solid&quot;</span>, <span class="hljs-string">&quot;longdash&quot;</span>)
+names(ltys) &lt;- levels(val_mlt$variable)
+
+<span class="hljs-comment">## build ggplot</span>
+<span class="hljs-keyword">library</span>(ggplot2)
+ggplot(aes(x = value, group = variable, colour = variable, 
+           linetype = variable), data = val_mlt) + 
+  geom_hline(yintercept = <span class="hljs-number">0</span>, size = <span class="hljs-number">.5</span>, colour = <span class="hljs-string">&quot;grey65&quot;</span>, linetype = <span class="hljs-string">&quot;dashed&quot;</span>) +
+  geom_line(stat = <span class="hljs-string">&quot;density&quot;</span>, size = <span class="hljs-number">1.2</span>) + 
+  scale_colour_manual(<span class="hljs-string">&quot;dataset&quot;</span>, values = cols) + 
+  scale_linetype_manual(<span class="hljs-string">&quot;dataset&quot;</span>, values = ltys) + 
+  labs(x = <span class="hljs-string">&quot;\nNDVI&quot;</span>, y = <span class="hljs-string">&quot;Density\n&quot;</span>) + 
+  theme_bw() + 
+  theme(panel.grid = element_blank(), 
+        legend.key.width = grid::unit(<span class="hljs-number">1.8</span>, <span class="hljs-string">&quot;cm&quot;</span>))
+</code></pre>
 <center>
-  <img src="https://i2.wp.com/gforge.se/wp-content/uploads/2015/02/Horse_power_smudge_9000.jpg" alt="parallel" style="width: 500px;"><br>
-  <small>Source: http://gforge.se/wp-content/uploads/2015/02/Horse_power_smudge_9000.jpg</small>
-</center>
-
-<h3 id="parallel-downloads">Parallel downloads</h3>
-<p>Note that in case of <code>downloadGimms</code>, an adequately fast active internect connection is required in order to accomplish multiple high-speed downloads in parallel. For instance, if you want to retrieve all files from the year 2000, the standard approach looks as follows. </p>
-<pre><code class="lang-r">system.time(
-  local_files &lt;- downloadGimms(x = as.Date(<span class="hljs-string">&quot;2000-01-01&quot;</span>), 
-                               y = as.Date(<span class="hljs-string">&quot;2000-12-31&quot;</span>), 
-                               dsn = paste0(getwd(), <span class="hljs-string">&quot;/data&quot;</span>), overwrite = <span class="hljs-literal">TRUE</span>)
-)
-<span class="hljs-comment">#   user  system elapsed </span>
-<span class="hljs-comment">#  0.336   2.736  84.654</span>
-</code></pre>
-<p>And here is the parallel version which operates on 3 nodes (note the newly introduced &apos;cores&apos; argument) and, at least on my machine and using my internet connection, performs roughly 2.5 times faster.</p>
-<pre><code class="lang-r">system.time(
-  local_files &lt;- downloadGimms(x = as.Date(<span class="hljs-string">&quot;2000-01-01&quot;</span>), 
-                               y = as.Date(<span class="hljs-string">&quot;2000-12-31&quot;</span>), 
-                               dsn = paste0(getwd(), <span class="hljs-string">&quot;/data&quot;</span>), overwrite = <span class="hljs-literal">TRUE</span>, 
-                               cores = <span class="hljs-number">3L</span>)
-
-)
-<span class="hljs-comment">#   user  system elapsed </span>
-<span class="hljs-comment">#  0.181   0.154  32.919</span>
-</code></pre>
-<h3 id="parallel-rasterization">Parallel rasterization</h3>
-<p>Speed gains can furthermore be achieved when running <code>rasterizeGimms</code> with the <code>raster::writeRaster</code> option enabled, i.e., parameter <code>filename</code> specified. When run in parallel, the operation performs considerably faster as compared to the base implementation. </p>
-<pre><code class="lang-r"><span class="hljs-comment">## first, the base version from above</span>
-system.time(
-  local_rasters &lt;- rasterizeGimms(local_files, filename = local_files, 
-                                  format = <span class="hljs-string">&quot;GTiff&quot;</span>, overwrite = <span class="hljs-literal">TRUE</span>)
-)
-<span class="hljs-comment">#   user  system elapsed </span>
-<span class="hljs-comment"># 62.916   4.594  70.480 </span>
-
-<span class="hljs-comment">## next, the parallelized version</span>
-rasterizeGimmsParallel &lt;- <span class="hljs-keyword">function</span>(files, nodes = <span class="hljs-number">3</span>, <span class="hljs-keyword">...</span>) {
-
-  <span class="hljs-comment"># create and register parallel backend</span>
-  <span class="hljs-keyword">library</span>(doParallel)
-  cl &lt;- makeCluster(nodes)
-  registerDoParallel(cl)
-
-  <span class="hljs-comment"># loop over &apos;x&apos; and process single files in parallel</span>
-  ls_rst &lt;- foreach(i = files, .packages = <span class="hljs-string">&quot;gimms&quot;</span>, 
-                    .export = ls(envir = globalenv())) %dopar% {
-                      rasterizeGimms(i, filename = i, <span class="hljs-keyword">...</span>)
-                    }
-
-  <span class="hljs-comment"># stack layers</span>
-  rst &lt;- raster::stack(ls_rst)
-
-  <span class="hljs-comment"># deregister parallel backend</span>
-  stopCluster(cl)
-
-  <span class="hljs-comment"># return layers</span>
-  <span class="hljs-keyword">return</span>(rst)
-}
-
-system.time(
-  rasterizeGimmsParallel(local_files, 
-                         format = <span class="hljs-string">&quot;GTiff&quot;</span>, overwrite = <span class="hljs-literal">TRUE</span>)
-)
-<span class="hljs-comment">#   user  system elapsed </span>
-<span class="hljs-comment">#  0.122   0.105  37.298</span>
-</code></pre>
-<p>In the context of parallel processing, feel free to also browse the compendium of advanced applications based on GIMMS NDVI<sub>3g</sub> data herein after. There are some more examples included demonstrating the reasonable use of <strong>doParallel</strong> functionality (RevolutionAnalytics and Weston, 2015) along with the <strong>gimms</strong> package.</p>
+  <img src="http://i.imgur.com/wFF8Oqv.png" alt="ggplot" style="width: 650px;">
+  <br><br><b>Figure 2.</b> Kernel density distribution of GIMMS NDVI<sub>3g</sub> values during the first (green) and second half of July 1981 (turquoise) and resulting value distribution of the maximum value composite layer (MVC; black). 
+</center> 
 
                     
                     </section>
@@ -398,10 +391,10 @@ system.time(
         </div>
 
         
-        <a href="../chapter05/advanced_applications.html" class="navigation navigation-prev " aria-label="Previous page: Advanced applications"><i class="fa fa-angle-left"></i></a>
+        <a href="../chapter04/quality_control.html" class="navigation navigation-prev " aria-label="Previous page: Quality control"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../chapter05/mann_kendall.html" class="navigation navigation-next " aria-label="Next page: Mann-Kendall trend test"><i class="fa fa-angle-right"></i></a>
+        <a href="../chapter06/advanced_applications.html" class="navigation navigation-next " aria-label="Next page: Advanced applications"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

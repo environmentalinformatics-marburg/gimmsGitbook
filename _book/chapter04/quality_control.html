@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>&#39;BFAST&#39; breakpoint analysis | Introducing the R &#39;gimms&#39; package</title>
+        <title>Quality control | Introducing the R &#39;gimms&#39; package</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.4.0">
@@ -29,10 +29,10 @@
         
     
     
-    <link rel="next" href="../references.html" />
+    <link rel="next" href="../chapter05/monthly_composites.html" />
     
     
-    <link rel="prev" href="../chapter05/mann_kendall.html" />
+    <link rel="prev" href="../chapter03/rasterize_data.html" />
     
 
         
@@ -40,7 +40,7 @@
     <body>
         
         
-    <div class="book" data-level="5.3" data-basepath=".." data-revision="Fri Dec 18 2015 14:26:36 GMT+0100 (CET)">
+    <div class="book" data-level="4" data-basepath=".." data-revision="Tue Feb 23 2016 13:27:13 GMT+0100 (CET)">
     
 
 <div class="book-summary">
@@ -116,14 +116,29 @@
             
         </li>
     
-        <li class="chapter " data-level="4" data-path="chapter04/monthly_composites.html">
+        <li class="chapter active" data-level="4" data-path="chapter04/quality_control.html">
             
                 
-                    <a href="../chapter04/monthly_composites.html">
+                    <a href="../chapter04/quality_control.html">
                 
                         <i class="fa fa-check"></i>
                         
                             <b>4.</b>
+                        
+                        Quality control
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5" data-path="chapter05/monthly_composites.html">
+            
+                
+                    <a href="../chapter05/monthly_composites.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
                         
                         Monthly composites
                     </a>
@@ -131,14 +146,14 @@
             
         </li>
     
-        <li class="chapter " data-level="5" data-path="chapter05/advanced_applications.html">
+        <li class="chapter " data-level="6" data-path="chapter06/advanced_applications.html">
             
                 
-                    <a href="../chapter05/advanced_applications.html">
+                    <a href="../chapter06/advanced_applications.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>5.</b>
+                            <b>6.</b>
                         
                         Advanced applications
                     </a>
@@ -147,14 +162,14 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="5.1" data-path="chapter05/parallel_processing.html">
+        <li class="chapter " data-level="6.1" data-path="chapter06/parallel_processing.html">
             
                 
-                    <a href="../chapter05/parallel_processing.html">
+                    <a href="../chapter06/parallel_processing.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>5.1.</b>
+                            <b>6.1.</b>
                         
                         &#39;gimms&#39; goes parallel
                     </a>
@@ -162,14 +177,14 @@
             
         </li>
     
-        <li class="chapter " data-level="5.2" data-path="chapter05/mann_kendall.html">
+        <li class="chapter " data-level="6.2" data-path="chapter06/mann_kendall.html">
             
                 
-                    <a href="../chapter05/mann_kendall.html">
+                    <a href="../chapter06/mann_kendall.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>5.2.</b>
+                            <b>6.2.</b>
                         
                         Mann-Kendall trend test
                     </a>
@@ -177,14 +192,14 @@
             
         </li>
     
-        <li class="chapter active" data-level="5.3" data-path="chapter05/breakpoint_analysis.html">
+        <li class="chapter " data-level="6.3" data-path="chapter06/breakpoint_analysis.html">
             
                 
-                    <a href="../chapter05/breakpoint_analysis.html">
+                    <a href="../chapter06/breakpoint_analysis.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>5.3.</b>
+                            <b>6.3.</b>
                         
                         &#39;BFAST&#39; breakpoint analysis
                     </a>
@@ -197,14 +212,14 @@
             
         </li>
     
-        <li class="chapter " data-level="6" data-path="references.html">
+        <li class="chapter " data-level="7" data-path="references.html">
             
                 
                     <a href="../references.html">
                 
                         <i class="fa fa-check"></i>
                         
-                            <b>6.</b>
+                            <b>7.</b>
                         
                         References
                     </a>
@@ -318,12 +333,49 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="global-vegetation-response-to-the-1997-98-el-ni-ntilde-o">Global vegetation response to the 1997/98 El Ni&#xF1;o</h1>
-<p>This page is currently in the making. </p>
-<center>
-  <img src="http://i.imgur.com/u9RRmZA.jpg" alt="work_in_progress" style="width: 400px;"><br>
-  <small>Source: https://www.flickr.com/photos/dullhunk/2101058680</small>
-</center>
+                        <h1 id="quality-control">Quality control</h1>
+<p>Using the default settings, <code>rasterizeGimms</code> creates proper <code>Raster*</code> objects from the ENVI binary images. Associated with each half-monthly NDVI<sub>3g</sub> dataset is a quality flag layer indicating the data reliability on a pixel basis. The flag values are as follows (taken from <a href="http://ecocast.arc.nasa.gov/data/pub/gimms/3g.v0/00READMEgeo.txt" target="_blank">http://ecocast.arc.nasa.gov/data/pub/gimms/3g.v0/00READMEgeo.txt</a>):</p>
+<table>
+<thead>
+<tr>
+<th>Flag value</th>
+<th><div align="left">Description</div></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>    1 and 2</td>
+<td>good value</td>
+</tr>
+<tr>
+<td>  3</td>
+<td>value derived from spline interpolation</td>
+</tr>
+<tr>
+<td>  4</td>
+<td>value derived from spline interpolation, possibly snow</td>
+</tr>
+<tr>
+<td>  5</td>
+<td>value derived from average seasonal profile</td>
+</tr>
+<tr>
+<td>  6</td>
+<td>value derived from average seasonal profile, possibly snow</td>
+</tr>
+<tr>
+<td>  7</td>
+<td>missing value</td>
+</tr>
+</tbody>
+</table>
+<p>Quality control can easily be carried out by invoking the function <code>qualityControl</code> which works both on binary files and already rasterized images. With regard to memory usage, however, we strongly advice to create NDVI and flag layers separately via <code>rasterizeGimms</code> (with <code>filename</code> provided) and use these as input for <code>qualityControl</code>.   </p>
+<pre><code class="lang-r">ndvi &lt;- rasterizeGimms(gimms_files[<span class="hljs-number">1</span>])
+flag &lt;- rasterizeGimms(gimms_files[<span class="hljs-number">1</span>], flag = <span class="hljs-literal">TRUE</span>)
+
+qc &lt;- qualityControl(ndvi, flag)
+</code></pre>
+<p><img src="figure/visualize-1.png" alt="plot of chunk visualize"></p>
 
                     
                     </section>
@@ -334,10 +386,10 @@
         </div>
 
         
-        <a href="../chapter05/mann_kendall.html" class="navigation navigation-prev " aria-label="Previous page: Mann-Kendall trend test"><i class="fa fa-angle-left"></i></a>
+        <a href="../chapter03/rasterize_data.html" class="navigation navigation-prev " aria-label="Previous page: Rasterize data"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../references.html" class="navigation navigation-next " aria-label="Next page: References"><i class="fa fa-angle-right"></i></a>
+        <a href="../chapter05/monthly_composites.html" class="navigation navigation-next " aria-label="Next page: Monthly composites"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

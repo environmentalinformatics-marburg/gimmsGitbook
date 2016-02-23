@@ -1,0 +1,10 @@
+ENVI
+description = { R-language data }
+samples = 2160
+lines = 4320
+bands = 1
+data type = 2
+header offset = 0
+interleave = bsq
+sensor type = AVHRR
+byte order = 1
