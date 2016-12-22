@@ -5,113 +5,42 @@ The function `significantTau` has been developed and added to **gimms** to facil
 
 
 ```r
-################################################################################
-## download data
-################################################################################
+### download data -----
+
+## number of cores for parallel processing
+cores <- parallel::detectCores() - 1
 
 ## download entire gimms ndvi3g collection in parallel
-library(doParallel)
-supcl <- makeCluster(3)
-registerDoParallel(supcl)
+gimms_fls <- downloadGimms(x = as.Date("1982-01-01"), cores = cores)
 
-gimms_files <- updateInventory()
-gimms_files <- foreach(i = gimms_files, .packages = "gimms", 
-                       .combine = "c") %dopar% downloadGimms(i, dsn = "data/")
 
-################################################################################
-## rasterize binary files
-################################################################################
+### rasterize images including quality control -----
 
-## rasterize gimms ndvi3g binary files in parallel (see function definition of 
-## `rasterizeGimmsParallel` in the previous section)
-gimms_raster <- rasterizeGimmsParallel(gimms_files, 
-                                       format = "GTiff", overwrite = TRUE)
-
-## remove incomplete first year
-gimms_files <- gimms_files[-(1:12)]
-gimms_raster <- gimms_raster[[-(1:12)]]
-
-################################################################################
-## resample to a lower spatial resolution (to avoid stack overflow)
-################################################################################
-
-## aggregate to a lower spatial resolution
-gimms_raster_agg <- foreach(i = 1:nlayers(gimms_raster), 
-                            .packages = c("raster", "rgdal")) %dopar%
-  aggregate(gimms_raster[[i]], fact = 3, fun = median, 
-            filename = paste0("data/agg/AGG_", names(gimms_raster[[i]])), 
-            format = "GTiff", overwrite = TRUE)
-
-gimms_raster_agg <- stack(gimms_raster_agg)
-
-################################################################################
-## remove seasonal signal
-################################################################################
-
-## calculate long-term bi-monthly means
-gimms_list_means <- foreach(i = 1:24, 
-                            .packages = c("raster", "rgdal")) %dopar% {
-  
-  # layers corresponding to current period (e.g. '82jan15a')
-  id <- seq(i, nlayers(gimms_raster_agg), 24)
-  gimms_raster_agg_tmp <- gimms_raster_agg[[id]]
-  
-  # calculate long-term mean of current period (e.g. for 1982-2013 'jan15a')
-  calc(gimms_raster_agg_tmp, fun = mean, na.rm = TRUE)
-} 
-
-gimms_raster_means <- stack(gimms_list_means)
-
-## replicate bi-monthly 'gimms_raster_means' to match up with number of layers of 
-## initial 'gimms_raster_agg' (as `foreach` does not support recycling!)
-gimms_list_means <- replicate(nlayers(gimms_raster_agg) / nlayers(gimms_raster_means), 
-                              gimms_raster_means)
-gimms_raster_means <- stack(gimms_list_means)
-
-## subtract long-term mean from bi-monthly values
-files_out <- names(gimms_raster_agg)
-gimms_list_deseason <- foreach(i = 1:nlayers(gimms_raster_agg), 
-                               .packages = c("raster", "rgdal")) %dopar% {
-  
-  rst <- gimms_raster_agg[[i]] - gimms_raster_means[[i]]
-  rst <- writeRaster(rst, 
-                     filename = paste0("data/dsn/DSN_", names(gimms_raster_agg[[i]])), 
-                     format = "GTiff", overwrite = TRUE)
-  
-}
-
-gimms_raster_deseason <- stack(gimms_list_deseason)
-
-################################################################################
-## mann-kendall trend test (p < 0.001)
-################################################################################
-
-## apply custom function on a pixel basis
-gimms_raster_trend <- significantTau(gimms_raster_deseason, prewhitening = TRUE, 
-                                     conf.intervals = FALSE, 
-                                     filename = "data/out/gimms_mk001_8213.tif")
-
-################################################################################
-## visualize data
-################################################################################
-
-## complementary shapefile data
+## reference extent
 library(rworldmap)
-data("countriesCoarse")
+deu <- subset(countriesCoarse, ADMIN == "Germany")
 
-## colors, see http://colorbrewer2.org/
-library(RColorBrewer)
-cols <- colorRampPalette(brewer.pal(11, "BrBG"))
+## rasterize
+gimms_rst <- rasterizeGimms(gimms_fls, ext = deu, keep = 0, cores = cores,
+                            filename = gsub(".nc4", ".tif", gimms_files),
+                            format = "GTiff", overwrite = TRUE)
 
-## create plot
-spplot(gimms_raster_trend, col.regions = cols(111), scales = list(draw = TRUE), 
-       sp.layout = list("sp.polygons", countriesCoarse, col = "grey75"), 
-       at = seq(-.55, .55, .01))
+
+### remove seasonal signal -----
+
+library(remote)
+gimms_dsn <- deseason(gimms_rst, cycle.window = 24L)
+
+
+### mann-kendall trend test (p < 0.001) -----
+
+gimms_mk <- significantTau(gimms_dsn, prewhitening = TRUE)
+gimms_mk
 ```
 
 
 
 <center>
-  <img src="http://i.imgur.com/5JvSV42.png" alt="spplot" style="width: 800px;"/><br>
-  <b>Figure 3.</b> Long-term trend (1982-2013; p < 0.001) in global GIMMS NDVI<sub>3g</sub> derived from pixel-based Mann-Kendall trend tests (Mann, 1945).
+  <img src="http://i.imgur.com/IYJyJP3.png" alt="trends" style="width: 600px;"/><br>
+  <b>Figure 3.</b> Long-term Mann-Kendall trends (1982 to 2015; <i>p < 0.001</i>) over Germany derived from GIMMS NDVI3g.v1.
 </center>

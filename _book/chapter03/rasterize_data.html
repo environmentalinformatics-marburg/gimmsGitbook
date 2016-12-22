@@ -1,33 +1,61 @@
+
 <!DOCTYPE HTML>
-<html lang="en" >
-    
+<html lang="" >
     <head>
-        
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Rasterize data | Introducing the R &#39;gimms&#39; package</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Rasterize data · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 2.4.0">
+        <meta name="generator" content="GitBook 3.2.2">
         
         
-        <meta name="HandheldFriendly" content="true"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
-        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
         
+    
     <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
     
         
-        <link rel="stylesheet" href="../gitbook/plugins/gitbook-plugin-highlight/website.css">
+    
         
     
+        
+    
+        
+    
+        
+    
+        
     
 
         
     
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
     
     <link rel="next" href="../chapter04/quality_control.html" />
     
@@ -35,175 +63,147 @@
     <link rel="prev" href="../chapter02/data_download.html" />
     
 
-        
     </head>
     <body>
         
+<div class="book">
+    <div class="book-summary">
         
-    <div class="book" data-level="3" data-basepath=".." data-revision="Tue Feb 23 2016 13:27:13 GMT+0100 (CET)">
-    
-
-<div class="book-summary">
-    <div class="book-search" role="search">
-        <input type="text" placeholder="Type to search" class="form-control" />
-    </div>
-    <nav role="navigation">
-        <ul class="summary">
             
-            
-            
-            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
 
             
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../index.html">
+            
+                <a href="../index.html">
+            
+                    
+                    Introduction
+            
+                </a>
+            
 
             
+        </li>
     
-        <li class="chapter " data-level="0" data-path="index.html">
+        <li class="chapter " data-level="1.2" data-path="../chapter01/introduction.html">
             
-                
-                    <a href="../index.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                        Introduction
-                    </a>
+                <a href="../chapter01/introduction.html">
             
+                    
+                    What's the story?
+            
+                </a>
+            
+
             
         </li>
     
-        <li class="chapter " data-level="1" data-path="chapter01/introduction.html">
+        <li class="chapter " data-level="1.3" data-path="../chapter02/data_download.html">
             
-                
-                    <a href="../chapter01/introduction.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>1.</b>
-                        
-                        What&#39;s the story?
-                    </a>
+                <a href="../chapter02/data_download.html">
             
+                    
+                    Data download
+            
+                </a>
+            
+
             
         </li>
     
-        <li class="chapter " data-level="2" data-path="chapter02/data_download.html">
+        <li class="chapter active" data-level="1.4" data-path="rasterize_data.html">
             
-                
-                    <a href="../chapter02/data_download.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>2.</b>
-                        
-                        Data download
-                    </a>
+                <a href="rasterize_data.html">
             
+                    
+                    Rasterize data
+            
+                </a>
+            
+
             
         </li>
     
-        <li class="chapter active" data-level="3" data-path="chapter03/rasterize_data.html">
+        <li class="chapter " data-level="1.5" data-path="../chapter04/quality_control.html">
             
-                
-                    <a href="../chapter03/rasterize_data.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>3.</b>
-                        
-                        Rasterize data
-                    </a>
+                <a href="../chapter04/quality_control.html">
             
+                    
+                    Quality control
+            
+                </a>
+            
+
             
         </li>
     
-        <li class="chapter " data-level="4" data-path="chapter04/quality_control.html">
+        <li class="chapter " data-level="1.6" data-path="../chapter05/monthly_composites.html">
             
-                
-                    <a href="../chapter04/quality_control.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>4.</b>
-                        
-                        Quality control
-                    </a>
+                <a href="../chapter05/monthly_composites.html">
             
+                    
+                    Monthly composites
+            
+                </a>
+            
+
             
         </li>
     
-        <li class="chapter " data-level="5" data-path="chapter05/monthly_composites.html">
+        <li class="chapter " data-level="1.7" data-path="../chapter06/advanced_applications.html">
             
-                
-                    <a href="../chapter05/monthly_composites.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>5.</b>
-                        
-                        Monthly composites
-                    </a>
+                <a href="../chapter06/advanced_applications.html">
             
+                    
+                    Advanced applications
             
-        </li>
-    
-        <li class="chapter " data-level="6" data-path="chapter06/advanced_applications.html">
+                </a>
             
-                
-                    <a href="../chapter06/advanced_applications.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>6.</b>
-                        
-                        Advanced applications
-                    </a>
-            
+
             
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="6.1" data-path="chapter06/parallel_processing.html">
+        <li class="chapter " data-level="1.7.1" data-path="../chapter06/mann_kendall.html">
             
-                
-                    <a href="../chapter06/parallel_processing.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>6.1.</b>
-                        
-                        &#39;gimms&#39; goes parallel
-                    </a>
+                <a href="../chapter06/mann_kendall.html">
             
+                    
+                    Mann-Kendall trend test
+            
+                </a>
+            
+
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="chapter06/mann_kendall.html">
+        <li class="chapter " data-level="1.7.2" data-path="../chapter06/breakpoint_analysis.html">
             
-                
-                    <a href="../chapter06/mann_kendall.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>6.2.</b>
-                        
-                        Mann-Kendall trend test
-                    </a>
+                <a href="../chapter06/breakpoint_analysis.html">
             
+                    
+                    'BFAST' breakpoint analysis
             
-        </li>
-    
-        <li class="chapter " data-level="6.3" data-path="chapter06/breakpoint_analysis.html">
+                </a>
             
-                
-                    <a href="../chapter06/breakpoint_analysis.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>6.3.</b>
-                        
-                        &#39;BFAST&#39; breakpoint analysis
-                    </a>
-            
+
             
         </li>
     
@@ -212,211 +212,209 @@
             
         </li>
     
-        <li class="chapter " data-level="7" data-path="references.html">
+        <li class="chapter " data-level="1.8" data-path="../references.html">
             
-                
-                    <a href="../references.html">
-                
-                        <i class="fa fa-check"></i>
-                        
-                            <b>7.</b>
-                        
-                        References
-                    </a>
+                <a href="../references.html">
             
+                    
+                    References
+            
+                </a>
+            
+
             
         </li>
     
 
+    
 
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
             
-            <li class="divider"></li>
-            <li>
-                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-                    Published with GitBook
-                </a>
-            </li>
-            
-        </ul>
-    </nav>
-</div>
+        
+    </div>
 
     <div class="book-body">
-        <div class="body-inner">
-            <div class="book-header" role="navigation">
-    <!-- Actions Left -->
-    <a href="#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
-    <a href="#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
-    
-    <div id="font-settings-wrapper" class="dropdown pull-left">
-        <a href="#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
-        </a>
-        <div class="dropdown-menu font-settings">
-    <div class="dropdown-caret">
-        <span class="caret-outer"></span>
-        <span class="caret-inner"></span>
-    </div>
+        
+            <div class="body-inner">
+                
+                    
 
-    <div class="buttons">
-        <button type="button" id="reduce-font-size" class="button size-2">A</button>
-        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
-    </div>
-
-    <div class="buttons font-family-list">
-        <button type="button" data-font="0" class="button">Serif</button>
-        <button type="button" data-font="1" class="button">Sans</button>
-    </div>
-
-    <div class="buttons color-theme-list">
-        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
-        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
-        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
-    </div>
-</div>
-
-    </div>
-
-    <!-- Actions Right -->
+<div class="book-header" role="navigation">
     
-    <div class="dropdown pull-right">
-        <a href="#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
-        </a>
-        <div class="dropdown-menu font-settings dropdown-left">
-            <div class="dropdown-caret">
-                <span class="caret-outer"></span>
-                <span class="caret-inner"></span>
-            </div>
-            <div class="buttons">
-                <button type="button" data-sharing="twitter" class="button">
-                    Share on Twitter
-                </button>
-                <button type="button" data-sharing="google-plus" class="button">
-                    Share on Google
-                </button>
-                <button type="button" data-sharing="facebook" class="button">
-                    Share on Facebook
-                </button>
-                <button type="button" data-sharing="weibo" class="button">
-                    Share on Weibo
-                </button>
-                <button type="button" data-sharing="instapaper" class="button">
-                    Share on Instapaper
-                </button>
-            </div>
-        </div>
-    </div>
-    
-
-    
-    <a href="#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
-    
-    
-    <a href="#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
-    
-    
-    <a href="#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
-    
-    
-    
-
 
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../" >Introducing the R &#39;gimms&#39; package</a>
+        <a href=".." >Rasterize data</a>
     </h1>
 </div>
 
-            <div class="page-wrapper" tabindex="-1" role="main">
-                <div class="page-inner">
-                
-                
-                    <section class="normal" id="section-">
-                    
-                        <h1 id="rasterize-data">Rasterize data</h1>
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="rasterize-data">Rasterize data</h1>
 <h3 id="rearrange-files">Rearrange files</h3>
-<p>As mentioned earlier, it is possible to have <code>updateInventory</code> return a vector of filenames sorted by date in ascending order. Sorting the files surely makes sense when it comes to <code>raster::stack</code>-ing continuous observations, calculating monthly composite layers and so forth, but is not necessarily required at the initial stage. <code>updateInventory(sort = TRUE)</code> (the default setting) is merely a wrapper around <code>rearrangeFiles</code> which may as well be executed as a stand-alone version later on. </p>
-<p><code>rearrangeFiles</code> works in two different ways, either with a &apos;character&apos; vector of (local or online) filenames passed on to <code>x</code> or with <code>list.files</code>-style pattern matching. While the former approach is quite straightforward, the latter requires the function to search the folder <code>dsn</code> for previously downloaded files matching a particular <code>pattern</code> (typically starting with the default setting &quot;^geo&quot;). Importing a sorted vector of already downloaded files from Jul-Dec 1981, for instance, would work as follows.</p>
-<pre><code class="lang-r">gimms_files &lt;- rearrangeFiles(dsn = paste0(getwd(), <span class="hljs-string">&quot;/data&quot;</span>), 
-                              pattern = <span class="hljs-string">&quot;^geo81.*VI3g$&quot;</span>, 
-                              full.names = <span class="hljs-literal">TRUE</span>)
-
-basename(gimms_files)
+<p>When working with local NDVI3g.v0 data outside the <strong>gimms</strong> environment, sorting files by date &#x2014; <em>e.g.</em>, in preparation for stacking continuous observations, calculating monthly composite layers and so forth &#x2014; is not quite straightforward. Therefore, a function to manually reorder these files might come in handy every now and then. </p>
+<p>Let&apos;s make this more clear: suppose you have some NDVI3g.v0 files from January to December 2000 in your current working directory. In order to import these back into R, you would probably try out something involving <code>list.files</code> at first:</p>
+<pre><code class="lang-r">gimms_files_v0 &lt;- list.files(pattern = <span class="hljs-string">&quot;^geo00.*VI3g$&quot;</span>)
+head(gimms_files_v0, <span class="hljs-number">8</span>)
 </code></pre>
-<pre><code> [1] &quot;geo81jul15a.n07-VI3g&quot; &quot;geo81jul15b.n07-VI3g&quot; &quot;geo81aug15a.n07-VI3g&quot;
- [4] &quot;geo81aug15b.n07-VI3g&quot; &quot;geo81sep15a.n07-VI3g&quot; &quot;geo81sep15b.n07-VI3g&quot;
- [7] &quot;geo81oct15a.n07-VI3g&quot; &quot;geo81oct15b.n07-VI3g&quot; &quot;geo81nov15a.n07-VI3g&quot;
-[10] &quot;geo81nov15b.n07-VI3g&quot; &quot;geo81dec15a.n07-VI3g&quot; &quot;geo81dec15b.n07-VI3g&quot;
-</code></pre><h3 id="rasterize-downloaded-data">Rasterize downloaded data</h3>
-<p><code>rasterizeGimms</code> is possibly the core part of the <strong>gimms</strong> package as it transforms the downloaded GIMMS files from native binary format into objects of class &apos;Raster*&apos; which is much easier to handle as compared to ENVI files. The function works with both single and multiple files passed on to <code>x</code> and, in the case of the latter, returns a &apos;RasterStack&apos; rather than a single &apos;RasterLayer&apos;. It is up to the user to decide whether or not to discard &apos;mask-water&apos; values (-10,000) and &apos;mask-nodata&apos; values (-5,000) (see also the <a href="http://ecocast.arc.nasa.gov/data/pub/gimms/3g.v0/00READMEgeo.txt" target="_blank">official README</a>). Also, the application of the scaling factor (1/10,000) is not mandatory. Taking the above set of <code>gimms_files</code> (Jul-Dec 1981) as input vector (notice the <code>full.names</code> argument passed on to <code>list.files</code> in the example above), the function call looks as follows.</p>
-<pre><code class="lang-r"><span class="hljs-comment">## rasterize files</span>
-gimms_raster &lt;- rasterizeGimms(gimms_files, 
-                               filename = gimms_files, 
-                               format = <span class="hljs-string">&quot;GTiff&quot;</span>, overwrite = <span class="hljs-literal">TRUE</span>)
+<pre><code>[1] &quot;geo00apr15a.n14-VI3g&quot; &quot;geo00apr15b.n14-VI3g&quot; &quot;geo00aug15a.n14-VI3g&quot;
+[4] &quot;geo00aug15b.n14-VI3g&quot; &quot;geo00dec15a.n16-VI3g&quot; &quot;geo00dec15b.n16-VI3g&quot;
+[7] &quot;geo00feb15a.n14-VI3g&quot; &quot;geo00feb15b.n14-VI3g&quot;
+</code></pre><p>See the problem? April comes first, then August, followed by December, and so on, which is of course not very desirable. As a solution, <code>rearrangeFiles</code> allows to easily rearrange NDVI3g.v0 files either stored in a vector or located in a particular folder. The function thereby works in two different ways, either with a &apos;character&apos; vector of filenames passed to <code>x</code>, or with <code>list.files</code>-style pattern matching.  </p>
+<pre><code class="lang-r">gimms_files_v0 &lt;- rearrangeFiles(pattern = <span class="hljs-string">&quot;^geo00.*VI3g$&quot;</span>, full.names = <span class="hljs-literal">TRUE</span>)
+basename(gimms_files_v0)[<span class="hljs-number">1</span>:<span class="hljs-number">8</span>]
 </code></pre>
-<pre><code>Error in compareRaster(rasters): different extent
-</code></pre><p>Since this operation usually takes some time, we highly recommend to make use of the <code>filename</code> argument that automatically invokes <code>raster::writeRaster</code>. With a little bit of effort and the help of <strong>RColorBrewer</strong> (Neuwirth, 2014) and <strong>spplot</strong> (Pebesma and Bivand, 2005; Bivand, Pebesma, and Gomez-Rubio, 2013), it is now easy to check whether everything worked out fine.</p>
-<pre><code class="lang-r"><span class="hljs-comment">## adjust layer names</span>
-names(gimms_raster) &lt;- basename(gimms_files)
+<pre><code>[1] &quot;geo00jan15a.n14-VI3g&quot; &quot;geo00jan15b.n14-VI3g&quot; &quot;geo00feb15a.n14-VI3g&quot;
+[4] &quot;geo00feb15b.n14-VI3g&quot; &quot;geo00mar15a.n14-VI3g&quot; &quot;geo00mar15b.n14-VI3g&quot;
+[7] &quot;geo00apr15a.n14-VI3g&quot; &quot;geo00apr15b.n14-VI3g&quot;
+</code></pre><p>Note that such a manual approach is, for reasons of convenience, not required when working with <code>downloadGimms(..., version = 0)</code> or <code>updateInventory(version = 0)</code> that return sorted vectors of NDVI3g.v0 files by default.</p>
+<hr>
 
-<span class="hljs-comment">## visualize single layers</span>
-<span class="hljs-keyword">library</span>(RColorBrewer)
-spplot(gimms_raster, 
-       at = seq(-<span class="hljs-number">0.2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0.1</span>), 
-       scales = list(draw = <span class="hljs-literal">TRUE</span>), 
-       col.regions = colorRampPalette(brewer.pal(<span class="hljs-number">11</span>, <span class="hljs-string">&quot;BrBG&quot;</span>)))
+<h3 id="rasterize-downloaded-data">Rasterize downloaded data</h3>
+<p><code>rasterizeGimms</code> is possibly the core part of the <strong>gimms</strong> package as it transforms the downloaded GIMMS files from NetCDF (NDVI3g.v1) or native binary format (NDVI3g.v0) to objects of class &apos;Raster*&apos; which is &#x2014; at least in my opinion &#x2014; much easier to handle than ENVI files or &apos;ncdf4&apos; objects. The function works with single and multiple files passed to <code>x</code> and typically returns a single &apos;RasterStack&apos; objects. As an alternative, if <code>split = TRUE</code>, a &apos;list&apos; of &apos;RasterStack&apos; objects is returned with each entry corresponding to a single file in <code>x</code>. </p>
+<p>Since <strong>gimms</strong> v1.0.0, scaling and the rejection of &apos;mask-water&apos; and &apos;mask-nodata&apos; values (see also the <a href="http://ecocast.arc.nasa.gov/data/pub/gimms/3g.v0/00READMEgeo.txt" target="_blank">official README</a>) is mandatory. Furthermore, if a user-defined spatial extent is provided, <code>raster::crop</code> is switched on automatically which significantly reduces computation times. Taking the above set of NDVI3g.v0 files (January to December 2000) as input vector, the function call looks as follows:</p>
+<pre><code class="lang-r"><span class="hljs-comment">## rasterize ndvi3g.v0 files</span>
+gimms_raster_v0 &lt;- rasterizeGimms(gimms_files_v0)
+gimms_raster_v0[[<span class="hljs-number">1</span>:<span class="hljs-number">2</span>]] <span class="hljs-comment"># January 2000</span>
+</code></pre>
+<pre><code>class       : RasterStack 
+dimensions  : 2160, 4320, 9331200, 2  (nrow, ncol, ncell, nlayers)
+resolution  : 0.08333333, 0.08333333  (x, y)
+extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
+coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+names       : geo00jan15a.n14.VI3g, geo00jan15b.n14.VI3g 
+min values  :                 -0.2,                 -0.2 
+max values  :                    1,                    1
+</code></pre><p>The above operation should be computationally feasible on most machines. When working with longer NDVI3g time series, however, it is strongly recommended to make use of <code>filename</code> and <code>cores</code> to ensure a more memory and time efficient processing, respectively. Especially the newly introduced NetCDF files (average size: 448.0 mb) require a rather large amount of memory and, without writing the resulting images to disk, will sooner or later result in the shutdown of R.</p>
+<p>An additional novelty in <code>rasterizeGimms</code> is the provision of simple QA features. If <code>keep</code> is specified, quality control is enabled automatically and all pixels with a flag value outside the defined value range are set to <code>NA</code> (see also Tables 1 and 2 on the next page). The above example, but this time using data from NDVI3g.v1 and discarding all pixels with a flag value of &apos;1&apos; (spline interpolation) or &apos;2&apos; (possible snow/cloud cover), goes like this:</p>
+<pre><code class="lang-r"><span class="hljs-comment">## download ndvi3g.v1 files for the year 2000</span>
+gimms_files_v1 &lt;- downloadGimms(x = as.Date(<span class="hljs-string">&quot;2000-01-01&quot;</span>), 
+                                y = as.Date(<span class="hljs-string">&quot;2000-12-31&quot;</span>))
+
+<span class="hljs-comment">## rasterize ndvi3g.v1 files</span>
+gimms_raster_v1 &lt;- rasterizeGimms(gimms_files_v1, keep = <span class="hljs-number">0</span>)
+gimms_raster_v1[[<span class="hljs-number">1</span>:<span class="hljs-number">2</span>]] <span class="hljs-comment"># January 2000</span>
+</code></pre>
+<pre><code>class       : RasterStack 
+dimensions  : 2160, 4320, 9331200, 2  (nrow, ncol, ncell, nlayers)
+resolution  : 0.08333333, 0.08333333  (x, y)
+extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
+coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+names       : ndvi3g_geo_v1_2000_0106.1, ndvi3g_geo_v1_2000_0106.2 
+min values  :                   -0.2999,                   -0.2999 
+max values  :                    0.9975,                    0.9969
+</code></pre><p>With a little bit of effort and the help from <strong>RColorBrewer</strong> (Neuwirth, 2014) and <code>spplot</code> (Pebesma and Bivand, 2005; Bivand, Pebesma, and Gomez-Rubio, 2013), it is now easy to check whether everything worked out fine:</p>
+<pre><code class="lang-r"><span class="hljs-keyword">library</span>(RColorBrewer)
+<span class="hljs-keyword">library</span>(rworldmap)
+
+spplot(gimms_raster_v1[[<span class="hljs-number">7</span>:<span class="hljs-number">12</span>]], at = seq(-<span class="hljs-number">0.3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0.01</span>), 
+       scales = list(draw = <span class="hljs-literal">TRUE</span>), main = list(<span class="hljs-string">&quot;NDVI&quot;</span>, cex = <span class="hljs-number">.9</span>),
+       colorkey = list(space = <span class="hljs-string">&quot;top&quot;</span>, width = <span class="hljs-number">.8</span>, height = <span class="hljs-number">.7</span>),
+       col.regions = colorRampPalette(brewer.pal(<span class="hljs-number">11</span>, <span class="hljs-string">&quot;BrBG&quot;</span>)), 
+       sp.layout = list(<span class="hljs-string">&quot;sp.polygons&quot;</span>, countriesCoarse, col = <span class="hljs-string">&quot;grey&quot;</span>), 
+       par.strip.text = list(cex = <span class="hljs-number">.7</span>))
 </code></pre>
 <center>
-  <img src="http://i.imgur.com/Qr3FuNr.png" alt="spplot" style="width: 800px;">
-  <br><br><b>Figure 1.</b> Global bi-monthly GIMMS NDVI<sub>3g</sub> images from July to December 2013.
+  <img src="http://i.imgur.com/zc2no2c.png" alt="ndvi" style="width: 800px;">
+  <br><b>Figure 1.</b> Quality-controlled global half-monthly GIMMS NDVI3g.v1 from April to June 2000.
 </center>
 
-<h3 id="create-a-header-file">Create a header file</h3>
-<p>In order to import the GIMMS binary files into R via <code>raster::raster</code>, the creation of header files (.hdr) that are located in the same folder as the binary files staged for processing is mandatory. The standard files required to properly process GIMMS NDVI<sub>3g</sub> data are created via the non-exported <code>createHeader</code> function and typically include the following parameters. </p>
-<pre><code class="lang-r"><span class="hljs-comment">## create gimms ndvi3g standard header file</span>
-gimms_header &lt;- gimms:::createHeader(paste0(getwd(), <span class="hljs-string">&quot;/geo13jul15a.n19-VI3g&quot;</span>))
-readLines(gimms_header)
-</code></pre>
-<pre><code>[1] &quot;ENVI&quot;
-[1] &quot;description = { R-language data }&quot;
-[1] &quot;samples = 2160&quot;
-[1] &quot;lines = 4320&quot;
-[1] &quot;bands = 1&quot;
-[1] &quot;data type = 2&quot;
-[1] &quot;header offset = 0&quot;
-[1] &quot;interleave = bsq&quot;
-[1] &quot;sensor type = AVHRR&quot;
-[1] &quot;byte order = 1&quot;
-</code></pre><p>The function is not explicitly exported since <code>rasterizeGimms</code> automatically creates the header files corresponding to each of the specified input files. Hence, you shouldn&apos;t be required to run the standalone version of the function unless you are interested in it. Note that it is also possible to automatically remove all the header files upon process completion by setting <code>rasterizeGimms(..., remove_header = TRUE)</code>. </p>
-
-                    
-                    </section>
-                
-                
-                </div>
-            </div>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
         </div>
-
-        
-        <a href="../chapter02/data_download.html" class="navigation navigation-prev " aria-label="Previous page: Data download"><i class="fa fa-angle-left"></i></a>
-        
-        
-        <a href="../chapter04/quality_control.html" class="navigation navigation-next " aria-label="Next page: Quality control"><i class="fa fa-angle-right"></i></a>
-        
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
     </div>
 </div>
 
-        
-<script src="../gitbook/app.js"></script>
+                        </div>
+                    </div>
+                
+            </div>
 
-<script>
-require(["gitbook"], function(gitbook) {
-    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
-    gitbook.start(config);
-});
-</script>
+            
+                
+                <a href="../chapter02/data_download.html" class="navigation navigation-prev " aria-label="Previous page: Data download">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../chapter04/quality_control.html" class="navigation navigation-next " aria-label="Next page: Quality control">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Rasterize data","level":"1.4","depth":1,"next":{"title":"Quality control","level":"1.5","depth":1,"path":"chapter04/quality_control.md","ref":"chapter04/quality_control.md","articles":[]},"previous":{"title":"Data download","level":"1.3","depth":1,"path":"chapter02/data_download.md","ref":"chapter02/data_download.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter03/rasterize_data.md","mtime":"2016-12-20T08:27:50.654Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2016-12-22T14:17:04.671Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
 
         
-    </body>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
     
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
 </html>
+
