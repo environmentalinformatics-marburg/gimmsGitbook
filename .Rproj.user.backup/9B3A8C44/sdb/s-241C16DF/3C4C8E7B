@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# Outline\n\n* [What's the story?](chapter01/introduction.md)\n* [Data download](chapter02/data_download.md)\n* [Rasterize data](chapter03/rasterize_data.md)\n* [Quality control](chapter04/quality_control.md)\n* [Monthly composites](chapter05/monthly_composites.md)\n* [Advanced applications](chapter06/advanced_applications.md)\n    * [Whittaker-based gap-filling](chapter06/whittaker.md)\n    * [Mann-Kendall trend test](chapter06/mann_kendall.md)\n    * ['BFAST' breakpoint analysis](chapter06/breakpoint_analysis.md)\n* [References](references.md)    ",
+    "created" : 1493287512009.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2356489625",
+    "id" : "3C4C8E7B",
+    "lastKnownWriteTime" : 1493287686,
+    "last_content_update" : 1493287686026,
+    "path" : "E:/repo/gimmsGitbook/SUMMARY.md",
+    "project_path" : "SUMMARY.md",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "markdown"
+}

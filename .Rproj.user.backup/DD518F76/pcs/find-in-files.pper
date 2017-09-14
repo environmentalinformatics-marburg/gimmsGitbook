@@ -1,0 +1,10 @@
+{
+    "dialog-state" : {
+        "caseSensitive" : false,
+        "filePatterns" : [
+        ],
+        "path" : "/media/fdetsch/Permanent/repo/gimmsGitbook",
+        "query" : "we ",
+        "regex" : false
+    }
+}

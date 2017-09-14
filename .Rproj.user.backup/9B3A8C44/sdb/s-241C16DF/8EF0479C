@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(latticeExtra)\n\n## raw data\nraw <- as.matrix(tfs)\nval0 <- raw[5000, ]\n\n## filled data\nmat <- as.matrix(wht)\n\n## create plots\nset.seed(123)\nids <- sample(ncell(wht), 12)\n\np <- lapply(ids, function(i) {\n  val1 <- mat[i, ]\n  \n  xyplot(val0 ~ tms, col = \"grey70\", xlab = \"Time (half months)\", \n         ylab = \"NDVI\", type = \"l\", lwd = 1.5, panel = function(x, y, ...) {\n           panel.xyplot(x, y, ...)\n           panel.xyplot(tms, val1, type = \"l\", lwd = 2, col = \"black\")\n         })\n})\n\npng(\"E:/programming/r/gimmsGitbook/out/whittaker.png\", width = 20, height = 12, \n    units = \"cm\", res = 500)\nprint(p)\ndev.off()\n",
+    "created" : 1493293427013.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1447561529",
+    "id" : "8EF0479C",
+    "lastKnownWriteTime" : 27303562373955695,
+    "last_content_update" : 1493298242970,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

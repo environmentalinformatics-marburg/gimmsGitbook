@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "beginCluster(3)\nout <- clusterR(gimms_dsn, significantTau)\nendCluster()\n\nout <- rasterEngine(inraster = gimms_dsn, fun = fun)\nsfQuickStop()",
+    "created" : 1482305560466.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "3591064493",
+    "id" : "372F383B",
+    "lastKnownWriteTime" : 80,
+    "last_content_update" : 1482321061123,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

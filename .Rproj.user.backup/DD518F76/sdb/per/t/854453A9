@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "```{r knitsetup, echo=FALSE, results='hide', warning=FALSE, message=FALSE, cache=FALSE}\nopts_knit$set(base.dir='./', fig.path='', out.format='md')\nopts_chunk$set(prompt=FALSE, comment='', results='markup')\n# See yihui.name/knitr/options for more Knitr options.\n##### Put other setup R code here\n\nlibrary(knitcitations)\noptions(\"citation_format\" = \"compatibility\")\nbib <- read.bibtex(\"../references.bib\")\n\n# end setup chunk\n```\n# Global Mann-Kendall trend test\n\nThe function `significantTau` has been developed and added to **gimms** to facilitate the calculation of reliable long-term monotonous trends. It is up to the user to decide whether or not to apply pre-whitening prior to the Mann-Kendall trend test in order to account for lag-1 autocorrelation. Currently, the function supports the pre-whitening algorithms proposed by `r citet(bib[\"Yue2002\"])` and `r citet(bib[\"Zhang2000\"])` which are both included in the **zyp** package `r citep(bib[\"Bronaugh2013\"])`. If no pre-whitening is desired, `significantTau` is merely a wrapper function around `MannKendall` from **Kendall** `r citep(bib[\"McLeod2011\"])`.\n\n```{r mannKendall, eval = FALSE}\n### download data -----\n\n## number of cores for parallel processing\ncores <- parallel::detectCores() - 1\n\n## download entire gimms ndvi3g collection in parallel\ngimms_fls <- downloadGimms(x = as.Date(\"1982-01-01\"), cores = cores)\n\n\n### rasterize images including quality control -----\n\n## reference extent\nlibrary(rworldmap)\ndeu <- subset(countriesCoarse, ADMIN == \"Germany\")\n\n## rasterize\ngimms_rst <- rasterizeGimms(gimms_fls, ext = deu, keep = 0, cores = cores,\n                            filename = gsub(\".nc4\", \".tif\", gimms_files),\n                            format = \"GTiff\", overwrite = TRUE)\n\n\n### remove seasonal signal -----\n\nlibrary(remote)\ngimms_dsn <- deseason(gimms_rst, cycle.window = 24L)\n\n\n### mann-kendall trend test (p < 0.001) -----\n\ngimms_mk <- significantTau(gimms_dsn, prewhitening = TRUE)\ngimms_mk\n```\n\n```{r visualize_mk, echo = FALSE, eval = FALSE, message = FALSE} \ngimms_mk <- \"/media/fdetsch/Permanent/programming/r/gimms/data/trends/mk_deu_8213.tif\"\nraster::raster(gimms_mk)\n\ndeu <- raster::getData(\"GADM\", country = \"DEU\", level = 1, \n                       path = \"/media/fdetsch/Permanent/programming/r/gimms/data/trends\")\n\nlibrary(latticeExtra)\nspplot(trd001, col.regions = Rsenal::envinmrPalette(100), \n       scales = list(draw = TRUE), maxpixels = ncell(trd001), \n       colorkey = list(width = .75, height = .6), \n       at = seq(-.2, .46, .01)) + \n    layer(sp.polygons(deu, col = \"grey25\"))\n```\n\n<center>\n  <img src=\"http://i.imgur.com/IYJyJP3.png\" alt=\"trends\" style=\"width: 600px;\"/><br>\n  <b>Figure 3.</b> Long-term Mann-Kendall trends (1982 to 2015; <i>p < 0.001</i>) over Germany derived from GIMMS NDVI3g.v1.\n</center>\n",
+    "created" : 1482403123482.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1200462335",
+    "id" : "854453A9",
+    "lastKnownWriteTime" : 1482416210,
+    "last_content_update" : 1482416210312,
+    "path" : "/media/fdetsch/Permanent/repo/gimmsGitbook/chapter06/mann_kendall.Rmd",
+    "project_path" : "chapter06/mann_kendall.Rmd",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

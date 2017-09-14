@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "```{r knitsetup, echo=FALSE, results='hide', warning=FALSE, message=FALSE, cache=FALSE}\nopts_knit$set(base.dir='./', fig.path='', out.format='md')\nopts_chunk$set(prompt=FALSE, comment='', results='markup')\n# See yihui.name/knitr/options for more Knitr options.\n##### Put other setup R code here\n\nlibrary(knitcitations)\noptions(\"citation_format\" = \"compatibility\")\nbib <- read.bibtex(\"../references.bib\")\n\n# end setup chunk\n```\n# Whittaker-based gap-filling\n\nAs outlined in an earlier chapter, NDVI3g.v1 (NDVI3g.v0) pixels with a flag value other than 0 (1 and 2) likely suffer from cloud/snow interference and hence originate from either spline interpolation or the average seasonal profile. These values are not considered reliable `r citep(list(bib[\"Detsch2016a\"], bib[\"Fensholt2012\"]))` and should hence be discarded before any further analysis, e.g. by specifying 'keep' in `rasterizeGimms`.\n\nAmong the variety of readily available approaches to fill the thus introduced gaps in vegetation indices time series -- see `r citet(bib[\"Liu2017\"])` for an up-to-date overview of possible approaches -- the following code snippet utilizes the so-called 'Modified Whittaker Smoother' `r citep(bib[\"Atzberger2011\"])`. The algorithm is provided through `whittaker.raster` which is part of the **MODIS** package and is hereinafter operated with an annual lambda of 500. See the function documentation for further details.\n\n```{r mannKendall, eval = FALSE}\n### download data -----\n\n## number of cores for parallel processing\ncores <- parallel::detectCores() - 1\n\n## download entire gimms ndvi3g collection in parallel\nnc4 <- downloadGimms(x = as.Date(\"1982-01-01\"), cores = cores)\n\n\n### rasterize images including quality control -----\n\n## reference extent\nlibrary(rworldmap)\ndeu <- subset(countriesCoarse, ADMIN == \"Germany\")\n\n## rasterize\ntfs <- rasterizeGimms(nc4, ext = deu, keep = 0, cores = cores,\n                      filename = gsub(\".nc4\", \".tif\", nc4),\n                      format = \"GTiff\", overwrite = TRUE)\n\n\n### perform gap-filling -----\n\nlibrary(MODIS)\n\n## time stamps\ntms <- monthlyIndices(nc4, timestamp = TRUE)\notm <- orgTime(tms)\n\n## apply whittaker smoother\nwht <- whittaker.raster(tfs, timeInfo = otm, lambda = 500L, outDirPath = \"wht\")\n```\n\n```{r visualize_mk, echo = FALSE, eval = FALSE, message = FALSE} \ngimms_mk <- \"/media/fdetsch/Permanent/programming/r/gimms/data/trends/mk_deu_8213.tif\"\nraster::raster(gimms_mk)\n\ndeu <- raster::getData(\"GADM\", country = \"DEU\", level = 1, \n                       path = \"/media/fdetsch/Permanent/programming/r/gimms/data/trends\")\n\nlibrary(latticeExtra)\nspplot(trd001, col.regions = Rsenal::envinmrPalette(100), \n       scales = list(draw = TRUE), maxpixels = ncell(trd001), \n       colorkey = list(width = .75, height = .6), \n       at = seq(-.2, .46, .01)) + \n    layer(sp.polygons(deu, col = \"grey25\"))\n```\n\n<center>\n  <img src=\"http://i.imgur.com/IYJyJP3.png\" alt=\"trends\" style=\"width: 600px;\"/><br>\n  <b>Figure 3.</b> Long-term Mann-Kendall trends (1982 to 2015; <i>p < 0.001</i>) over Germany derived from GIMMS NDVI3g.v1.\n</center>\n",
+    "created" : 1493287697708.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "760722710",
+    "id" : "152F4D3D",
+    "lastKnownWriteTime" : 1493297940,
+    "last_content_update" : 1493297940995,
+    "path" : "E:/repo/gimmsGitbook/chapter06/whittaker.Rmd",
+    "project_path" : "chapter06/whittaker.Rmd",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

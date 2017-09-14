@@ -1,0 +1,56 @@
+```{r knitsetup, echo=FALSE, results='hide', warning=FALSE, message=FALSE, cache=FALSE}
+opts_knit$set(base.dir='./', fig.path='', out.format='md')
+opts_chunk$set(prompt=FALSE, comment='', results='markup')
+# See yihui.name/knitr/options for more Knitr options.
+##### Put other setup R code here
+
+library(knitcitations)
+options("citation_format" = "compatibility")
+bib <- read.bibtex("../references.bib")
+
+# end setup chunk
+```
+# Whittaker-based gap-filling
+
+As outlined in an earlier chapter, NDVI3g.v1 (NDVI3g.v0) pixels with a flag value other than 0 (1 and 2) likely suffer from cloud/snow interference and hence originate from either spline interpolation or the average seasonal profile. These values are not considered reliable `r citep(list(bib["Detsch2016a"], bib["Fensholt2012"]))` and should hence be discarded before any further analysis, e.g. by specifying 'keep' in `rasterizeGimms`.
+
+Among the variety of readily available approaches to fill the thus introduced gaps in vegetation indices time series -- see `r citet(bib["Liu2017"])` for an up-to-date overview of possible approaches -- the following code snippet utilizes the so-called 'Modified Whittaker Smoother' `r citep(bib["Atzberger2011"])`. The algorithm is provided through `whittaker.raster` which is part of the **MODIS** package and is hereinafter operated with an annual lambda of 500. See the function documentation for further details.
+
+```{r mannKendall, eval = FALSE}
+### download data -----
+
+## number of cores for parallel processing
+cores <- parallel::detectCores() - 1
+
+## download entire gimms ndvi3g collection in parallel
+nc4 <- downloadGimms(x = as.Date("1982-01-01"), cores = cores)
+
+
+### rasterize images including quality control -----
+
+## reference extent
+library(rworldmap)
+deu <- subset(countriesCoarse, ADMIN == "Germany")
+
+## rasterize
+tfs <- rasterizeGimms(nc4, ext = deu, keep = 0, cores = cores,
+                      filename = gsub(".nc4", ".tif", nc4),
+                      format = "GTiff", overwrite = TRUE)
+
+
+### perform gap-filling -----
+
+library(MODIS)
+
+## time stamps
+tms <- monthlyIndices(nc4, timestamp = TRUE)
+otm <- orgTime(tms)
+
+## apply whittaker smoother
+wht <- whittaker.raster(tfs, timeInfo = otm, lambda = 500L, outDirPath = "wht")
+```
+
+<center>
+  <img src="http://imgur.com/xhCvlIB" alt="whittaker" style="width: 600px;"/><br>
+  <b>Figure 3.</b> Raw NDVI3g.v1 (gray; 2000 to 2009) and Whittaker-smoothed curve (black) for 12 random pixels in Germany.
+</center>

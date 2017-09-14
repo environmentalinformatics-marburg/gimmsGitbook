@@ -6,6 +6,7 @@
 * [Quality control](chapter04/quality_control.md)
 * [Monthly composites](chapter05/monthly_composites.md)
 * [Advanced applications](chapter06/advanced_applications.md)
+    * [Whittaker-based gap-filling](chapter06/whittaker.md)
     * [Mann-Kendall trend test](chapter06/mann_kendall.md)
     * ['BFAST' breakpoint analysis](chapter06/breakpoint_analysis.md)
 * [References](references.md)    

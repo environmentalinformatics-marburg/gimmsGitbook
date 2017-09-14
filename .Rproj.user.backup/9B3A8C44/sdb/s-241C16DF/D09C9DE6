@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "## initialize gitbook\n# devtools::install_github(\"renkun-ken/Rgitbook\")\nlibrary(Rgitbook)\n\ncheckForGitbook()\ngitbookInfo()\n\n# newGitbook(\"gimmsGitbook\")\n# initGitbook()\nbuildGitbook()  \n\n# drs <- list.files(pattern = \"^chapter\", include.dirs = TRUE)\n# for (i in 1:length(drs)) {\n#   if(file.exists(\"references.bib\"))\n#     file.remove(\"references.bib\")\n#   \n#   bib_tmp <- knitcitations::read.bibtex(paste0(drs[i], \"/references.bib\"))\n#   knitcitations::write.bibtex(bib_tmp, file = \"references.bib\", \n#                               append = ifelse(i == 1, FALSE, TRUE))\n# }\n\nopenGitbook()\n\n# publishGitbook(\"fdetsch/gitbookGimms\")",
+    "created" : 1493286557854.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "492960517",
+    "id" : "D09C9DE6",
+    "lastKnownWriteTime" : 1478849822,
+    "last_content_update" : 1478849822,
+    "path" : "E:/programming/r/gimms/R/control_gitbook.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
